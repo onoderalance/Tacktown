@@ -11,7 +11,7 @@ public class BossManagerScript : MonoBehaviour
     float preciseTimer = 0.0f; //delta time
     int stepCounter = 0; //increases every (stepTime) seconds
     bool stepUpdated = false;
-    public float stepTime = 1.0f;
+    public float stepsPerSecond = 1.0f;
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
@@ -32,7 +32,7 @@ public class BossManagerScript : MonoBehaviour
         private float xPos;
         private float speed;
 
-        public ShotFromTop(float xPos, float speed)
+        public SingleShotFromTop(float xPos, float speed)
         {
             this.xPos = xPos;
             this.speed = speed;
@@ -40,8 +40,8 @@ public class BossManagerScript : MonoBehaviour
 
         public void create() {
             float yPos = -0.5f;
-            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 0));
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
             newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
 
@@ -52,7 +52,7 @@ public class BossManagerScript : MonoBehaviour
         private float xPos;
         private float speed;
 
-        public ShotFromTop(float xPos, float speed)
+        public SingleShotFromBottom(float xPos, float speed)
         {
             this.xPos = xPos;
             this.speed = speed;
@@ -61,8 +61,8 @@ public class BossManagerScript : MonoBehaviour
         public void create()
         {
             float yPos = -1.78f;
-            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 180));
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
             newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
@@ -72,7 +72,7 @@ public class BossManagerScript : MonoBehaviour
         private float yPos;
         private float speed;
 
-        public ShotFromTop(float yPos, float speed)
+        public SingleShotFromLeft(float yPos, float speed)
         {
             this.yPos = yPos;
             this.speed = speed;
@@ -80,34 +80,71 @@ public class BossManagerScript : MonoBehaviour
 
         public void create()
         {
-            float xPos = -0.5f;
-            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 90));
+            float xPos = -6.27f;
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+        }
+    }
+
+    private class SingleShotFromRight
+    {
+        private float yPos;
+        private float speed;
+
+        public SingleShotFromRight(float yPos, float speed)
+        {
+            this.yPos = yPos;
+            this.speed = speed;
+        }
+
+        public void create()
+        {
+            float xPos = -14.3f;
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
             newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
 
-    public Dictionary<int, List<Attack> attackList; //maps a time to a list of attacks that will happen on this step
+    Dictionary<int, List<Attack>> attackList; //maps a time to a list of attacks that will happen on this step
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        attackList = new Dictionary<int, List<Attack>> {
+            [3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f) },
+        };
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        preciseTimer = Time.deltaTime;
+
+        //call onStepUpdate if we have just moved to a new step
+        if ((int)(preciseTimer/stepsPerSecond) != stepCounter)
+        {
+            stepCounter = (int)(preciseTimer/stepsPerSecond);
+            onStepUpdate();
+        }
+
     }
 
     //only called when the step counter is updated
     void onStepUpdate() {
 
-        
-
-        stepUpdated = false;
+        //if there is an attack on this step:
+        if (attackList.ContainsKey(stepCounter)) {
+            currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
+            for (int i = 0; i <currretnStepAttackList.Count; i++)
+            {
+                currentStepAttacklist[i].create();
+            }
+        }
     }
 
 
@@ -116,8 +153,8 @@ public class BossManagerScript : MonoBehaviour
     void singleShotFromTop(float xPos)
     {
         float yPos = -0.5f;
-        Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
-        GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0,0,0));
+        Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0,0,0));
 
     }
 
@@ -132,8 +169,8 @@ public class BossManagerScript : MonoBehaviour
     void singleShotFromBottom(float xPos)
     {
         float yPos = -1.78f;
-        Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
-        GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 180));
+        Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
     }
 
     void burstFromBottom(float xPos, int numShots, float spaceOffset, float timeOffset)
@@ -145,8 +182,8 @@ public class BossManagerScript : MonoBehaviour
     void singleShotFromLeft(float yPos)
     {
         float yPos = -0.5f;
-        Vector3 spawnPosition = new Vector3(xPos, -0.5, 0)
-        GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 0));
+        Vector3 spawnPosition = new Vector3(xPos, -0.5, 0);
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 
 
@@ -165,11 +202,11 @@ public class BossManagerScript : MonoBehaviour
 
     void singleShotFromCenter(float angle)
     {
-        GameObject newProjectile = Instantiate(projectile, centerPosition, new Vector3(0, 0, angle));
+        GameObject newProjectile = Instantiate(projectile, centerPosition, Quaternion.Euler(0, 0, angle));
     }
 
     void homingMissleFromCenter() {
-        GameObject newProjectile = Instantiate(homingMissile, centerPosition, new Vector3(0, 0, 0));
+        GameObject newProjectile = Instantiate(homingMissile, centerPosition, Quaternion.Euler(0, 0, 0));
     }
 
 }
