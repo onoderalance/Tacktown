@@ -8,10 +8,12 @@ public class cutsceneManager : MonoBehaviour
     public GameObject hudObject;
     public dialogue dialogueMain;
     public dialogue dialogueCenter;
+    public GameObject fadeBlock;
 
     public SpriteRenderer spriteRenderer;
     public Sprite background;
     public Sprite sprite1;
+    public Sprite sprite2;
 
     int cutsceneIndex = -1; //tracks what part of the cutscene we are at
     int currScene = 0; //tracks currently running scene
@@ -23,10 +25,18 @@ public class cutsceneManager : MonoBehaviour
     float timeNext = 0.0f; //tracks what time we will be ready for the next portion of the cutscene
     public float timeElapsed = 0.0f;
     public bool timerActive = false;
+
+    public float fadeTimeElapsed = 0.0f;
+    float fadeDuration = 0.0f;
+    bool fadeActive = false;
+    bool fadeDir = false;
+    
+
      
     // Start is called before the first frame update
     void Start()
     {
+        setFadeAlpha(0.0f);
         dialogueMain.PauseDialogue();
         dialogueCenter.PauseDialogue();
         dialogueMain.toggleSkip();
@@ -44,6 +54,35 @@ public class cutsceneManager : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
         }
+        //fades if fade timer active
+        if (fadeActive)
+        {
+            fadeTimeElapsed += Time.deltaTime;
+
+            // Calculate the step per frame based on fadeDuration
+            float increment = Time.deltaTime / fadeDuration; // Increment based on time per frame
+
+            float currentAlpha = getFadeAlpha();
+
+            // Fade in
+            if (fadeDir)
+            {
+                setFadeAlpha(Mathf.Clamp01(currentAlpha + increment)); // Increment alpha smoothly
+            }
+            // Fade out
+            else
+            {
+                setFadeAlpha(Mathf.Clamp01(currentAlpha - increment)); // Decrement alpha smoothly
+            }
+
+            // End fade when time is up
+            if (fadeTimeElapsed >= fadeDuration)
+            {
+                endFade();
+            }
+
+
+        }
         // increments cutsceneIndex if conditions are met
         if (cutsceneIndex >= 0)
         {
@@ -55,17 +94,12 @@ public class cutsceneManager : MonoBehaviour
                     cutsceneNextReady = true;
                 }
             }
-            /*
-            print(cutsceneNextReady);
-            print(timerActive);
-            print(timeElapsed);
-            print(timeNext);
-            */
             // next scene is ready and timer is elapsed or not initialized
             if (cutsceneNextReady && timeElapsed >= timeNext)
             {
                 //print("baba");
                 cutsceneIndex += 1;
+                cutsceneNextReady = false;
                 resetTimer();
                 sceneCheck();
             }
@@ -94,13 +128,21 @@ public class cutsceneManager : MonoBehaviour
                         autoTimeToNext(5.0f);
                         break;
                     case 1: //My woman...
-                        switchFrame(2 , 0);
-                        autoTimeToNext(1.5f);
+                        switchFrame(2, 0);
+                        autoTimeToNext(3.0f);
                         break;
-                    case 2:
+                    case 2: //She was my belle.
                         switchFrame(2, 1);
                         autoTimeToNext(2.0f);
+                        startFade(1.5f, true);
                         break;
+                    case 3: //It's not going to be pretty...
+                        switchFrame(3, 2);
+                        autoTimeToNext(3.0f);
+                        //setFadeAlpha(0.0f);
+                        startFade(1.5f, true);
+                        break;
+
                 }
                 break;
             case 2:
@@ -117,7 +159,7 @@ public class cutsceneManager : MonoBehaviour
     {
         cutsceneNextReady = true; //auto scrolling
         timerActive = true;
-        timeNext = 5.0f;
+        timeNext = time;
     }
 
     // Switch visual frame shown for the cutscenes, starting dialogue from given index
@@ -139,6 +181,13 @@ public class cutsceneManager : MonoBehaviour
                 dialogueMain.SkipToLine(frame);
                 currDialogue = dialogueCenter;
                 break;
+            case 3:
+                spriteRenderer.sprite = sprite2;
+                hudObject.SetActive(true);
+                dialogueCenter.PauseDialogue();
+                dialogueMain.SkipToLine(frame);
+                currDialogue = dialogueCenter;
+                break;
         }
     }
 
@@ -149,7 +198,56 @@ public class cutsceneManager : MonoBehaviour
         timeElapsed = 0.0f;
     }
 
+    //sets the alpha of the fade block
+    void setFadeAlpha(float alpha)
+    {
+        SpriteRenderer spriteRenderer = fadeBlock.GetComponent<SpriteRenderer>();
+        Color color = spriteRenderer.color;
+        color.a = alpha;
+        spriteRenderer.color = color;
+    }
 
-   
+    //gets the alpha of the fade block
+    float getFadeAlpha()
+    {
+        SpriteRenderer spriteRenderer = fadeBlock.GetComponent<SpriteRenderer>();
+        Color color = spriteRenderer.color;
+        return color.a;
+    }
 
+    //starts the fade over a given amount of time, dir controls whether is fades in or out
+    void startFade(float fadeTime, bool dir)
+    {
+        // fade in
+        if (dir)
+        {
+            setFadeAlpha(0.0f);
+            fadeActive = true;
+            fadeDuration = fadeTime;
+            fadeDir = dir;
+        }
+        // fade out
+        else
+        {
+            setFadeAlpha(1.0f);
+            fadeActive = true;
+            fadeDuration = fadeTime;
+            fadeDir = dir;
+        }
+    }
+
+    //ends the fade whopee
+    void endFade()
+    {
+        fadeActive = false;
+        fadeTimeElapsed = 0.0f;
+        if (fadeDir)
+        {
+            setFadeAlpha(1.0f);
+        }
+        else
+        {
+            setFadeAlpha(0.0f);
+        }
+    }
 }
