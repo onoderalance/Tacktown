@@ -7,12 +7,13 @@ public class TackProjectileScript : MonoBehaviour
 
     public float speed = 1.0f;
     float rangeFromPlayer = 30.0f;
+    private Rigidbody2D rb;
     //public GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -30,10 +31,11 @@ public class TackProjectileScript : MonoBehaviour
     }
 
     //destroy itself when it hits a wall
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("collision!");
-        if (collision.collider.tag == "wall") {
+        if (collision.gameObject.CompareTag("wall")) {
+            Debug.Log("destroy");
             Destroy(gameObject);
         }
 
