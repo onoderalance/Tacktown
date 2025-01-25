@@ -24,7 +24,6 @@ public class dialogue : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialogue();
     }
 
     void Update()
