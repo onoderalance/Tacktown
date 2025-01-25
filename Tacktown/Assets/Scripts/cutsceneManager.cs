@@ -6,8 +6,8 @@ using TMPro;
 public class cutsceneManager : MonoBehaviour
 {
     public GameObject hudObject;
-    public GameObject dialogueMain;
-    public GameObject dialogueCenter;
+    public dialogue dialogueMain;
+    public dialogue dialogueCenter;
 
     public SpriteRenderer spriteRenderer;
     public Sprite background;
@@ -23,6 +23,8 @@ public class cutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dialogueMain.PauseDialogue();
+        dialogueCenter.PauseDialogue();
         switchFrame(1);
     }
 
@@ -70,14 +72,14 @@ public class cutsceneManager : MonoBehaviour
             case 1: //background case, hud should be hidden here
                 spriteRenderer.sprite = background;
                 hudObject.SetActive(false);
-                dialogueCenter.SetActive(true);
-                dialogueMain.SetActive(false);
+                dialogueCenter.ContinueDialogue();
+                dialogueMain.PauseDialogue();
                 break;
             case 2:
                 spriteRenderer.sprite = sprite1;
                 hudObject.SetActive(true);
-                dialogueCenter.SetActive(false);
-                dialogueMain.SetActive(true);
+                dialogueCenter.PauseDialogue();
+                dialogueMain.ContinueDialogue();
                 break;
         }
     }

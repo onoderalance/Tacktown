@@ -16,6 +16,8 @@ public class dialogue : MonoBehaviour
     public AudioSource audioSource;
     public bool useBubbleAudio = true; // choose which audio to use
 
+    public bool isActive = true;
+
     private Coroutine typingCoroutine; // Store the current typing coroutine for control
 
     void Start()
@@ -26,19 +28,22 @@ public class dialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
+        if (isActive)
         {
-            if (textComponent.text == lines[index])
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
             {
-                NextLine();
+                if (textComponent.text == lines[index])
+                {
+                    NextLine();
+                }
+                else
+                {
+                    StopTyping();
+                    textComponent.text = lines[index];
+                    StopAudio();
+                }
             }
-            else
-            {
-                StopTyping();
-                textComponent.text = lines[index];
-                StopAudio();
-            }
-        }
+        } 
     }
 
     public int getCurrentIndex()
@@ -61,6 +66,7 @@ public class dialogue : MonoBehaviour
 
             typingCoroutine = StartCoroutine(TypeLine());
         }
+        isActive = true;
     }
 
     public void PauseDialogue()
@@ -71,6 +77,7 @@ public class dialogue : MonoBehaviour
             typingCoroutine = null;
             StopAudio();
         }
+        isActive = false;
     }
 
     public void SkipToLine(int lineIndex)
