@@ -32,16 +32,59 @@ public class BossManagerScript : MonoBehaviour
         private float xPos;
         private float speed;
 
-        public ShotFromTop(float xPos)
+        public ShotFromTop(float xPos, float speed)
         {
+            this.xPos = xPos;
+            this.speed = speed;
+        }
 
+        public void create() {
+            float yPos = -0.5f;
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 0));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+        }
+
+    }
+
+    private class SingleShotFromBottom
+    {
+        private float xPos;
+        private float speed;
+
+        public ShotFromTop(float xPos, float speed)
+        {
+            this.xPos = xPos;
+            this.speed = speed;
+        }
+
+        public void create()
+        {
+            float yPos = -1.78f;
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 180));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
+    private class SingleShotFromLeft
+    {
+        private float yPos;
+        private float speed;
 
-    struct Attack {
-        AttackType type;
-        
+        public ShotFromTop(float yPos, float speed)
+        {
+            this.yPos = yPos;
+            this.speed = speed;
+        }
+
+        public void create()
+        {
+            float xPos = -0.5f;
+            Vector3 spawnPosition = new Vector3(xPos, yPos, 0)
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, new Vector3(0, 0, 90));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+        }
     }
 
 
