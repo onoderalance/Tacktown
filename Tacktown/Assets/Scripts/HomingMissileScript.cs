@@ -9,6 +9,8 @@ public class HomingMissileScript : MonoBehaviour
     public Transform playerPosition;
     public float timeAlive = 5.0f;
 
+
+    float detonationTime = 2.0f;
     float rangeFromPlayer = 30.0f;
     float timer = 0.0f;
 
@@ -28,22 +30,35 @@ public class HomingMissileScript : MonoBehaviour
         timer += Time.deltaTime;
 
         //look at player
-        transform.LookAt(playerPosition);
+        transform.up = playerPosition.position - transform.position;
 
         //move it forward
-        transform.position += transform.up * Time.deltaTime * -speed;
+        transform.position += transform.up * Time.deltaTime * speed;
+
+        //countdown to explosion
+        trackTimeAlive();
     }
 
     void trackTimeAlive() {
         //see if timer has expired. If it has, initiate self destruct sequence
         if (timer > timeAlive)
         {
+            sprite.color = Color.red;
             //flash colors
             if ((int)(timer*2) % 2 == 0)
             {
-                sprite.color = new Color(1, 0, 0);
+                sprite.color = Color.red;
+            } else
+            {
+                sprite.color = Color.white;
             }
             
+        }
+
+        //if it has been detonating for long enough, delete itself
+        if (timer > timeAlive + detonationTime)
+        {
+            Destroy(gameObject);
         }
     }
 
