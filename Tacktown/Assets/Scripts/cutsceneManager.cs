@@ -4,48 +4,80 @@ using UnityEngine;
 
 public class cutsceneManager : MonoBehaviour
 {
-    bool hudState = true;
     public GameObject hudObject;
 
+    public SpriteRenderer spriteRenderer;
+    public Sprite background;
+    public Sprite sprite1;
+
+    int cutsceneIndex = -1; //tracks what part of the cutscene we are at
+    bool cutsceneNextReady = false; //tracks if we are ready to move on to the next part of the cutscene
+    float timeNext = 0.0f; //tracks what time we will be ready for the next portion of the cutscene
+
+    public float timeElapsed = 0.0f;
+    public bool timerActive = false;
+     
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // increments timer if timer is active
+        if (timerActive)
         {
-            toggleHUD();
+            timeElapsed += Time.deltaTime;
         }
-        hudObject.SetActive(hudState);
+
+        if (cutsceneIndex >= 0)
+        {
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            switchFrame(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            switchFrame(2);
+        }
     }
 
-    // Called when running a given cutscene
+    // Called to start running a given cutscene
     // 1 - intro 2 - betrayal 3 - bad end 4 - good end
-    void runScene(int scene)
+    public void startScene(int scene)
     {
-
+        //reset index to playing
+        cutsceneIndex = 0;
     }
 
     // Switch visual frame shown for the cutscenes
     void switchFrame(int frame)
     {
-
+        // reactivate hud if necessary
+        hudObject.SetActive(true);
+  
+        switch(frame)
+        {
+            case 1: //background case, hud should be hidden here
+                spriteRenderer.sprite = background;
+                hudObject.SetActive(false);
+                break;
+            case 2:
+                spriteRenderer.sprite = sprite1;
+                break;
+        }
     }
 
-    // Toggle HUD bar visual
-    void toggleHUD()
+    void resetTimer()
     {
-        hudState = !hudState; 
+        timerActive = false;
+        timeElapsed = 0.0f;
     }
 
-    // Set HUD bar visual
-    void setHUD(bool hud)
-    {
-        hudState = hud;
-    }
+   
 
 }
