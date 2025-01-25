@@ -13,11 +13,11 @@ public class cutsceneManager : MonoBehaviour
     public Sprite background;
     public Sprite sprite1;
 
-    int cutsceneIndex = -1; //tracks what part of the cutscene we are at
+   // int[] cutsceneIndex = new int[4]; //tracks what part of the cutscene we are at, each index corresponds to a scene
     bool cutsceneNextReady = false; //tracks if we are ready to move on to the next part of the cutscene
     float timeNext = 0.0f; //tracks what time we will be ready for the next portion of the cutscene
-    int currScene = -1; //tracks what scene is being played
 
+    int currDialogue = 0; //tracks which dialogue object is currently being used
     int nextSceneIndex = -1; //determines what text index will be the next part of the scene
 
     public float timeElapsed = 0.0f;
@@ -39,7 +39,7 @@ public class cutsceneManager : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
         }
-
+/*
         // increments cutsceneIndex if conditions are met
         if (cutsceneIndex >= 0)
         {
@@ -54,7 +54,7 @@ public class cutsceneManager : MonoBehaviour
                 sceneCheck();
                 cutsceneIndex += 1;
             }
-        }
+        }*/
     }
 
     // Called to start running a given cutscene
@@ -62,23 +62,26 @@ public class cutsceneManager : MonoBehaviour
     public void startScene(int scene)
     {
         //reset index to playing
-        cutsceneIndex = 0;
-        currScene = scene;
+        //cutsceneIndex[1] = 0;
+        //currScene = scene;
     }
 
     // Determines what is going on in the current scene
+    /*
     void sceneCheck()
     {
-        switch (scene)
+        switch (cutsceneIndex)
         {
             case 1: //intro scene
                 switch (cutsceneIndex)
+                { 
                     case 0: //it always starts...
                         switchFrame(1);
                         break;
                     case 1: //My woman...
                         switchFrame(2);
                         break;
+                }
                 break;
             case 2:
                 break;
@@ -87,7 +90,7 @@ public class cutsceneManager : MonoBehaviour
             case 4:
                 break;
         }
-    }
+    }*/
    
 
     // Switch visual frame shown for the cutscenes
