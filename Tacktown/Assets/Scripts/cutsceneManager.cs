@@ -17,7 +17,7 @@ public class cutsceneManager : MonoBehaviour
     int currScene = 0; //tracks currently running scene
     bool cutsceneNextReady = false; //tracks if we are ready to move on to the next part of the cutscene
    
-    int currDialogue = 0; //tracks which dialogue object is currently being used
+    public dialogue currDialogue; //tracks which dialogue object is currently being used
     int nextSceneIndex = -1; //determines what text index will be the next part of the scene
 
     float timeNext = 0.0f; //tracks what time we will be ready for the next portion of the cutscene
@@ -29,7 +29,11 @@ public class cutsceneManager : MonoBehaviour
     {
         dialogueMain.PauseDialogue();
         dialogueCenter.PauseDialogue();
+        dialogueMain.toggleSkip();
+        dialogueCenter.toggleSkip();
+        resetTimer();
         startScene(1);
+        sceneCheck();
     }
 
     // Update is called once per frame
@@ -44,13 +48,22 @@ public class cutsceneManager : MonoBehaviour
         if (cutsceneIndex >= 0)
         {
             // text has gone far enough to trigger the next scene
-            if(currTextIndex == nextSceneIndex)
+            if(currDialogue != null)
             {
-                cutsceneNextReady = true;
+                if (currDialogue.getCurrentIndex() == nextSceneIndex)
+                {
+                    cutsceneNextReady = true;
+                }
             }
+            print(cutsceneNextReady);
+            print(timerActive);
+            print(timeElapsed);
+            print(timeNext);
             // next scene is ready and timer is elapsed or not initialized
             if (cutsceneNextReady && timeElapsed >= timeNext)
             {
+                print("baba");
+                resetTimer();
                 sceneCheck();
                 cutsceneIndex += 1;
             }
@@ -63,21 +76,26 @@ public class cutsceneManager : MonoBehaviour
     {
         //reset index to playing
         cutsceneIndex = 0;
+        currScene = scene;
     }
 
     // Determines what is going on in the current scene
     void sceneCheck()
     {
-        switch (cutsceneIndex)
+        switch (currScene)
         {
             case 1: //intro scene
                 switch (cutsceneIndex)
                 { 
                     case 0: //it always starts...
-                        switchFrame(1);
+                        switchFrame(1, 0);
+                        nextSceneIndex = 1; //next index is 1
+                        cutsceneNextReady = true; //auto scrolling
+                        timerActive = true;
+                        timeNext = 5.0f;
                         break;
                     case 1: //My woman...
-                        switchFrame(2);
+                        switchFrame(2 , 0);
                         break;
                 }
                 break;
@@ -91,24 +109,24 @@ public class cutsceneManager : MonoBehaviour
     }
    
 
-    // Switch visual frame shown for the cutscenes
-    void switchFrame(int frame)
+    // Switch visual frame shown for the cutscenes, starting dialogue from given index
+    void switchFrame(int scene, int frame)
     {
-        switch (frame)
+        switch (scene)
         {
             case 1: //background case, hud should be hidden here
                 spriteRenderer.sprite = background;
                 hudObject.SetActive(false);
-                dialogueCenter.ContinueDialogue();
+                dialogueCenter.SkipToLine(frame);
                 dialogueMain.PauseDialogue();
-                currDialogue = 2; //2 corresponds to center dialogue
+                currDialogue = dialogueMain;
                 break;
             case 2:
                 spriteRenderer.sprite = sprite1;
                 hudObject.SetActive(true);
                 dialogueCenter.PauseDialogue();
-                dialogueMain.ContinueDialogue();
-                currDialogue = 1; //1 corresponds to main dialogue
+                dialogueMain.SkipToLine(frame);
+                currDialogue = dialogueCenter;
                 break;
         }
     }
