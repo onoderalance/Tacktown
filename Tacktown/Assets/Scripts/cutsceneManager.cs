@@ -91,13 +91,15 @@ public class cutsceneManager : MonoBehaviour
                 { 
                     case 0: //it always starts...
                         switchFrame(1, 0);
-                        nextSceneIndex = 1; //next index is 1
-                        cutsceneNextReady = true; //auto scrolling
-                        timerActive = true;
-                        timeNext = 5.0f;
+                        autoTimeToNext(5.0f);
                         break;
                     case 1: //My woman...
                         switchFrame(2 , 0);
+                        autoTimeToNext(2.0f);
+                        break;
+                    case 2:
+                        switchFrame(2, 1);
+                        autoTimeToNext(2.0f);
                         break;
                 }
                 break;
@@ -110,6 +112,13 @@ public class cutsceneManager : MonoBehaviour
         }
     }
    
+    //used to reset timer when the scene needs to autoplay to the next point
+    void autoTimeToNext(float time)
+    {
+        cutsceneNextReady = true; //auto scrolling
+        timerActive = true;
+        timeNext = 5.0f;
+    }
 
     // Switch visual frame shown for the cutscenes, starting dialogue from given index
     void switchFrame(int scene, int frame)

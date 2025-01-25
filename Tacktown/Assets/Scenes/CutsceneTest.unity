@@ -723,7 +723,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
-      value: "My woman\u2019s name was Michelle. She was my belle."
+      value: "My woman\u2019s name was Michelle."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[1]
+      value: She was my belle.
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Pivot.x
