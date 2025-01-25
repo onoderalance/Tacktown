@@ -16,6 +16,9 @@ public class cutsceneManager : MonoBehaviour
     int cutsceneIndex = -1; //tracks what part of the cutscene we are at
     bool cutsceneNextReady = false; //tracks if we are ready to move on to the next part of the cutscene
     float timeNext = 0.0f; //tracks what time we will be ready for the next portion of the cutscene
+    int currScene = -1; //tracks what scene is being played
+
+    int nextSceneIndex = -1; //determines what text index will be the next part of the scene
 
     public float timeElapsed = 0.0f;
     public bool timerActive = false;
@@ -25,7 +28,7 @@ public class cutsceneManager : MonoBehaviour
     {
         dialogueMain.PauseDialogue();
         dialogueCenter.PauseDialogue();
-        switchFrame(1);
+        startScene(1);
     }
 
     // Update is called once per frame
@@ -40,19 +43,17 @@ public class cutsceneManager : MonoBehaviour
         // increments cutsceneIndex if conditions are met
         if (cutsceneIndex >= 0)
         {
+            // text has gone far enough to trigger the next scene
+            if(currTextIndex == nextSceneIndex)
+            {
+                cutsceneNextReady = true;
+            }
             // next scene is ready and timer is elapsed or not initialized
             if (cutsceneNextReady && timeElapsed >= timeNext)
             {
+                sceneCheck();
                 cutsceneIndex += 1;
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            switchFrame(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            switchFrame(2);
         }
     }
 
@@ -62,7 +63,32 @@ public class cutsceneManager : MonoBehaviour
     {
         //reset index to playing
         cutsceneIndex = 0;
+        currScene = scene;
     }
+
+    // Determines what is going on in the current scene
+    void sceneCheck()
+    {
+        switch (scene)
+        {
+            case 1: //intro scene
+                switch (cutsceneIndex)
+                    case 0: //it always starts...
+                        switchFrame(1);
+                        break;
+                    case 1: //My woman...
+                        switchFrame(2);
+                        break;
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+    }
+   
 
     // Switch visual frame shown for the cutscenes
     void switchFrame(int frame)

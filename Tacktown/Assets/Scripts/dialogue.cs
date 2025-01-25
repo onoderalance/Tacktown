@@ -16,7 +16,8 @@ public class dialogue : MonoBehaviour
     public AudioSource audioSource;
     public bool useBubbleAudio = true; // choose which audio to use
 
-    public bool isActive = true;
+    public bool isActive = true; //determines if the given text box is active
+    public bool canSkip = true; //determiens if the player is able to skip the current text
 
     private Coroutine typingCoroutine; // Store the current typing coroutine for control
 
@@ -30,17 +31,20 @@ public class dialogue : MonoBehaviour
     {
         if (isActive)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
+            if(canSkip)
             {
-                if (textComponent.text == lines[index])
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
                 {
-                    NextLine();
-                }
-                else
-                {
-                    StopTyping();
-                    textComponent.text = lines[index];
-                    StopAudio();
+                    if (textComponent.text == lines[index])
+                    {
+                        NextLine();
+                    }
+                    else
+                    {
+                        StopTyping();
+                        textComponent.text = lines[index];
+                        StopAudio();
+                    }
                 }
             }
         } 
