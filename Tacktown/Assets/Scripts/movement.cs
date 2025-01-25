@@ -10,6 +10,7 @@ public class movement : MonoBehaviour
     public float accelerationFactor = 0.1f;
     public float decelerationFactor = 2f;
     public float maxPushForce = 20f;
+    public float bounceFactor = 0.5f;
 
     private Vector2 velocity = Vector2.zero;
     private Vector2 pushDirection = Vector2.zero;
@@ -17,6 +18,14 @@ public class movement : MonoBehaviour
 
     private int decelTime = 5;
 
+    private Rigidbody2D rb;
+
+
+    void Start()
+    {
+        print("start");
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
@@ -81,5 +90,19 @@ public class movement : MonoBehaviour
     {
         Vector3 mouseScreenPos = Input.mousePosition;
         return Camera.main.ScreenToWorldPoint(mouseScreenPos);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("wall"))
+        {
+            print("COLLIDED");
+
+            // get collision normal (wall dir.)
+            Vector2 collisionNormal = collision.contacts[0].normal;
+
+            // reflect accross (preserve momentum)
+            velocity = Vector2.Reflect(velocity, collisionNormal) * bounceFactor;
+        }
     }
 }
