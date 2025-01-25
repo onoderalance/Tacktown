@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class movement : MonoBehaviour
     public float maxPushForce = 20f;
     public float bounceFactor = 0.5f;
 
-    public float airstreamForce = 0.5f;
+    public float airstreamForce = 8f;
     public float airstreamSlowFactor = 0.5f;
 
     private Vector2 velocity = Vector2.zero;
@@ -21,6 +22,7 @@ public class movement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool inAirstream = false; // Track if the player is in the airstream
+    private Vector2 airstreamDirection = Vector2.zero; // Direction of the airstream
 
     void Start()
     {
@@ -81,17 +83,17 @@ public class movement : MonoBehaviour
             }
         }
 
-        // Apply upward momentum when in the airstream
+        // Apply force in the direction of the airstream when inside the airstream
         if (inAirstream)
         {
-            velocity.y += airstreamForce * Time.deltaTime; // Apply upward force
+            velocity += airstreamDirection * airstreamForce * Time.deltaTime; // Apply force in airstream direction
         }
         else
         {
-            // Slowly slow down upward momentum when leaving the airstream
-            if (velocity.y > 0)
+            // Slowly slow down momentum when not in the airstream
+            if (velocity.magnitude > 0)
             {
-                velocity.y -= airstreamSlowFactor * Time.deltaTime;
+                velocity -= velocity.normalized * airstreamSlowFactor * Time.deltaTime;
             }
         }
 
@@ -112,29 +114,33 @@ public class movement : MonoBehaviour
         {
             print("COLLIDED");
 
-            // get collision normal (wall dir.)
+            // Get collision normal (wall direction)
             Vector2 collisionNormal = collision.contacts[0].normal;
 
-            // reflect accross (preserve momentum)
+            // Reflect across the collision normal (preserve momentum)
             velocity = Vector2.Reflect(velocity, collisionNormal) * bounceFactor;
         }
     }
 
     // Call this method when the player enters the airstream trigger zone
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag(""))
-    //    {
-    //        inAirstream = true;
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("airstream"))
+        {
+            inAirstream = true;
 
-    //// Call this method when the player exits the airstream trigger zone
-    //private void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.CompareTag(""))
-    //    {
-    //        inAirstream = false;
-    //    }
-    //}
+            // Get the direction of the airstream based on its rotation
+            airstreamDirection = other.transform.up; // Assume the airstream's forward direction is its "up" vector
+        }
+    }
+
+    // Call this method when the player exits the airstream trigger zone
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("airstream"))
+        {
+            inAirstream = false;
+            airstreamDirection = Vector2.zero; // Reset the airstream direction
+        }
+    }
 }
