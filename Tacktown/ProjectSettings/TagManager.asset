@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wall
   - sharp
+  - airstream
   layers:
   - Default
   - TransparentFX

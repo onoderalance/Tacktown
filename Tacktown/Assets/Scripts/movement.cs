@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class movement : MonoBehaviour
@@ -12,6 +10,9 @@ public class movement : MonoBehaviour
     public float maxPushForce = 20f;
     public float bounceFactor = 0.5f;
 
+    public float airstreamForce = 0.5f;
+    public float airstreamSlowFactor = 0.5f;
+
     private Vector2 velocity = Vector2.zero;
     private Vector2 pushDirection = Vector2.zero;
     private float distanceFactor = 0;
@@ -19,7 +20,7 @@ public class movement : MonoBehaviour
     private int decelTime = 5;
 
     private Rigidbody2D rb;
-
+    private bool inAirstream = false; // Track if the player is in the airstream
 
     void Start()
     {
@@ -61,12 +62,10 @@ public class movement : MonoBehaviour
         }
         else
         {
-
             if (decelTime > 0)
             {
                 decelTime--;
             }
-
             else
             {
                 float currentSpeed = Mathf.Lerp(maxSpeed, minSpeed, distanceFactor * 0.5f);
@@ -81,9 +80,24 @@ public class movement : MonoBehaviour
                 }
             }
         }
+
+        // Apply upward momentum when in the airstream
+        if (inAirstream)
+        {
+            velocity.y += airstreamForce * Time.deltaTime; // Apply upward force
+        }
+        else
+        {
+            // Slowly slow down upward momentum when leaving the airstream
+            if (velocity.y > 0)
+            {
+                velocity.y -= airstreamSlowFactor * Time.deltaTime;
+            }
+        }
+
         // Move the player based on the velocity
         transform.position += (Vector3)(velocity * Time.deltaTime);
-    } 
+    }
 
     // Helper function to get the mouse position relative to the Camera
     private Vector2 GetMouseWorldPosition()
@@ -105,4 +119,22 @@ public class movement : MonoBehaviour
             velocity = Vector2.Reflect(velocity, collisionNormal) * bounceFactor;
         }
     }
+
+    // Call this method when the player enters the airstream trigger zone
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag(""))
+    //    {
+    //        inAirstream = true;
+    //    }
+    //}
+
+    //// Call this method when the player exits the airstream trigger zone
+    //private void OnTriggerExit2D(Collider2D other)
+    //{
+    //    if (other.CompareTag(""))
+    //    {
+    //        inAirstream = false;
+    //    }
+    //}
 }
