@@ -13,11 +13,39 @@ public class BossManagerScript : MonoBehaviour
     bool stepUpdated = false;
     public float stepTime = 1.0f;
 
-    enum Attacks    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
+    enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
                     SHOT_FROM_CENTER, MISSILE_FROM_CENTER};
 
-    public Dictionary<int, > attackList; //maps a time to an attack
+    private class Attack {
+
+        public void create() {
+            //TO BE OVERRIDDEN!
+            //can be called by any attack child to add it to the game world
+        }
+
+
+    }
+
+    private class SingleShotFromTop
+    {
+        private float xPos;
+        private float speed;
+
+        public ShotFromTop(float xPos)
+        {
+
+        }
+    }
+
+
+    struct Attack {
+        AttackType type;
+        
+    }
+
+
+    public Dictionary<int, List<Attack> attackList; //maps a time to a list of attacks that will happen on this step
 
     // Start is called before the first frame update
     void Start()
