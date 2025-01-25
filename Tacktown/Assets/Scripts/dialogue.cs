@@ -9,25 +9,24 @@ public class dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
 
-    public int index;
+    private int index;
 
-    public AudioClip bubbleAudio; 
-    public AudioClip tackAudio; 
-    public AudioSource audioSource; 
+    public AudioClip bubbleAudio;
+    public AudioClip tackAudio;
+    public AudioSource audioSource;
     public bool useBubbleAudio = true; // choose which audio to use
 
+    private Coroutine typingCoroutine; // Store the current typing coroutine for control
 
-    // Start is called before the first frame update
     void Start()
     {
         textComponent.text = string.Empty;
         StartDialogue();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
         {
             if (textComponent.text == lines[index])
             {
@@ -35,31 +34,78 @@ public class dialogue : MonoBehaviour
             }
             else
             {
-                StopAllCoroutines();
+                StopTyping();
                 textComponent.text = lines[index];
-                StopAudio(); // stops audio if skipped as well
+                StopAudio();
             }
         }
+    }
+
+    public int getCurrentIndex()
+    {
+        return index;
     }
 
     public void StartDialogue()
     {
         index = 0;
-        StartCoroutine(TypeLine());
+        ContinueDialogue();
+    }
+
+    public void ContinueDialogue()
+    {
+        if (index < lines.Length)
+        {
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+
+            typingCoroutine = StartCoroutine(TypeLine());
+        }
+    }
+
+    public void PauseDialogue()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+            StopAudio();
+        }
+    }
+
+    public void SkipToLine(int lineIndex)
+    {
+        if (lineIndex >= 0 && lineIndex < lines.Length)
+        {
+            PauseDialogue(); // Stop current typing
+            index = lineIndex;
+            textComponent.text = string.Empty;
+            ContinueDialogue();
+        }
+    }
+
+    private void StopTyping()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine); // Stop the current typing coroutine
+            typingCoroutine = null;
+            StopAudio(); // Stop the typing sound
+        }
     }
 
     IEnumerator TypeLine()
     {
-        PlayAudio(); // start audio as typing begins
+        PlayAudio(); // Start audio as typing begins
 
-        // types each char 1 by 1
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
 
-        StopAudio(); // stop when line finishes
+        StopAudio(); // Stop when line finishes
+        typingCoroutine = null; // Mark typing as finished
     }
 
     void NextLine()
@@ -68,11 +114,11 @@ public class dialogue : MonoBehaviour
         {
             index++;
             textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
+            ContinueDialogue();
         }
         else
         {
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); // End dialogue
         }
     }
 
@@ -93,4 +139,10 @@ public class dialogue : MonoBehaviour
             audioSource.Stop();
         }
     }
+
+    public void changeAudio()
+    {
+        useBubbleAudio = !useBubbleAudio;
+    }
 }
+
