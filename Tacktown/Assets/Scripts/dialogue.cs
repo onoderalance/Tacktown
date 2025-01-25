@@ -80,6 +80,8 @@ public class dialogue : MonoBehaviour
             typingCoroutine = null;
             StopAudio();
         }
+        //clear text
+        textComponent.text = string.Empty;
         isActive = false;
     }
 

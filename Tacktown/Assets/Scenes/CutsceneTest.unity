@@ -557,6 +557,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_text
+      value: "It\u2019s not gonna be pretty. It\u2019s not gonna be clean. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b09d4c1d542e24de38c2ab2bafb17014, type: 2}
@@ -719,7 +723,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
-      value: 
+      value: "My woman\u2019s name was Michelle. She was my belle."
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Pivot.x
@@ -830,6 +834,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_text
+      value: "It\u2019s not gonna be pretty. It\u2019s not gonna be clean. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: b09d4c1d542e24de38c2ab2bafb17014, type: 2}
@@ -852,6 +860,10 @@ PrefabInstance:
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_hasFontAssetChanged

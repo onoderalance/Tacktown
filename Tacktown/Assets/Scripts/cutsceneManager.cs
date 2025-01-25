@@ -55,17 +55,19 @@ public class cutsceneManager : MonoBehaviour
                     cutsceneNextReady = true;
                 }
             }
+            /*
             print(cutsceneNextReady);
             print(timerActive);
             print(timeElapsed);
             print(timeNext);
+            */
             // next scene is ready and timer is elapsed or not initialized
             if (cutsceneNextReady && timeElapsed >= timeNext)
             {
-                print("baba");
+                //print("baba");
+                cutsceneIndex += 1;
                 resetTimer();
                 sceneCheck();
-                cutsceneIndex += 1;
             }
         }
     }
