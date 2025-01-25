@@ -95,7 +95,7 @@ public class cutsceneManager : MonoBehaviour
                         break;
                     case 1: //My woman...
                         switchFrame(2 , 0);
-                        autoTimeToNext(2.0f);
+                        autoTimeToNext(1.5f);
                         break;
                     case 2:
                         switchFrame(2, 1);
