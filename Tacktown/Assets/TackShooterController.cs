@@ -24,6 +24,7 @@ public class TackShooterController : MonoBehaviour
         if (shotTimer >= shootRate)
         {
             spawnProjectile(shootSpeed);
+            shotTimer = 0.0f;
         }
     }
 
@@ -31,7 +32,7 @@ public class TackShooterController : MonoBehaviour
 
         Vector3 spawnPosition = transform.position + new Vector3(0,spawnOffset,0);
 
-        GameObject newProjectile = Instantiate(projectile, transform.position);
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, transform.rotation);
         newProjectile.GetComponent<TackProjectileScript>().speed = speed;
     }
 
