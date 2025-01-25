@@ -5,6 +5,8 @@ using UnityEngine;
 public class cutsceneManager : MonoBehaviour
 {
     public GameObject hudObject;
+    public GameObject dialogueMain;
+    public GameObject dialogueCenter;
 
     public SpriteRenderer spriteRenderer;
     public Sprite background;
@@ -32,9 +34,14 @@ public class cutsceneManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
         }
 
+        // increments cutsceneIndex if conditions are met
         if (cutsceneIndex >= 0)
         {
+            // next scene is ready and timer is elapsed or not initialized
+            if (cutsceneNextReady && timeElapsed >= timeNext)
+            {
 
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -72,6 +79,7 @@ public class cutsceneManager : MonoBehaviour
         }
     }
 
+    //resets the active timer
     void resetTimer()
     {
         timerActive = false;
