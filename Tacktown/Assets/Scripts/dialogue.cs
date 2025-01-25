@@ -9,7 +9,13 @@ public class dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
 
-    private int index;
+    public int index;
+
+    public AudioClip bubbleAudio; 
+    public AudioClip tackAudio; 
+    public AudioSource audioSource; 
+    public bool useBubbleAudio = true; // choose which audio to use
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +37,7 @@ public class dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
+                StopAudio(); // stops audio if skipped as well
             }
         }
     }
@@ -43,12 +50,16 @@ public class dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        PlayAudio(); // start audio as typing begins
+
         // types each char 1 by 1
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        StopAudio(); // stop when line finishes
     }
 
     void NextLine()
@@ -62,6 +73,24 @@ public class dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    private void PlayAudio()
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = useBubbleAudio ? bubbleAudio : tackAudio;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    private void StopAudio()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 }
