@@ -61,7 +61,7 @@ public class dialogue : MonoBehaviour
         ContinueDialogue();
     }
 
-    public void ContinueDialogue()
+    public void ContinueDialogue() // dont really need to call
     {
         if (index < lines.Length)
         {
@@ -84,7 +84,8 @@ public class dialogue : MonoBehaviour
         isActive = false;
     }
 
-    public void SkipToLine(int lineIndex)
+    // USE THIS MOSTLY
+    public void SkipToLine(int lineIndex) // calls continuedialogue
     {
         if (lineIndex >= 0 && lineIndex < lines.Length)
         {
@@ -93,6 +94,12 @@ public class dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             ContinueDialogue();
         }
+    }
+
+    public bool toggleSkip() // allows you to disable/able ffwrd / skip, returns whether active or not
+    {
+        canSkip = !canSkip;
+        return canSkip;
     }
 
     private void StopTyping()
