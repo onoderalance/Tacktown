@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class cutsceneManager : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class cutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        switchFrame(1);
     }
 
     // Update is called once per frame
@@ -40,7 +41,7 @@ public class cutsceneManager : MonoBehaviour
             // next scene is ready and timer is elapsed or not initialized
             if (cutsceneNextReady && timeElapsed >= timeNext)
             {
-
+                cutsceneIndex += 1;
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -64,17 +65,19 @@ public class cutsceneManager : MonoBehaviour
     // Switch visual frame shown for the cutscenes
     void switchFrame(int frame)
     {
-        // reactivate hud if necessary
-        hudObject.SetActive(true);
-  
-        switch(frame)
+        switch (frame)
         {
             case 1: //background case, hud should be hidden here
                 spriteRenderer.sprite = background;
                 hudObject.SetActive(false);
+                dialogueCenter.SetActive(true);
+                dialogueMain.SetActive(false);
                 break;
             case 2:
                 spriteRenderer.sprite = sprite1;
+                hudObject.SetActive(true);
+                dialogueCenter.SetActive(false);
+                dialogueMain.SetActive(true);
                 break;
         }
     }
@@ -85,6 +88,7 @@ public class cutsceneManager : MonoBehaviour
         timerActive = false;
         timeElapsed = 0.0f;
     }
+
 
    
 
