@@ -41,7 +41,7 @@ public class HomingMissileScript : MonoBehaviour
             //flash colors
             if ((int)(timer*2) % 2 == 0)
             {
-                Sprite.color = new Color(1, 0, 0);
+                sprite.color = new Color(1, 0, 0);
             }
             
         }
