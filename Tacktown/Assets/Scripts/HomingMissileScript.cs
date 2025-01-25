@@ -13,6 +13,7 @@ public class HomingMissileScript : MonoBehaviour
     float detonationTime = 2.0f;
     float rangeFromPlayer = 30.0f;
     float timer = 0.0f;
+    public int hits = 1;
 
     SpriteRenderer sprite;
 
@@ -58,7 +59,11 @@ public class HomingMissileScript : MonoBehaviour
         //if it has been detonating for long enough, delete itself
         if (timer > timeAlive + detonationTime)
         {
-            Destroy(gameObject);
+            hits--;
+            if (hits == 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
