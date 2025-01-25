@@ -12,6 +12,7 @@ public class movement : MonoBehaviour
     public float maxPushForce = 20f;
     private Vector2 velocity = Vector2.zero;
     private Vector2 pushDirection = Vector2.zero;
+    private int decelTime = 5;
 
 
     void Update()
@@ -25,6 +26,8 @@ public class movement : MonoBehaviour
         // When mouse button is held
         if (Input.GetMouseButton(0))
         {
+            decelTime = 5;
+
             // Calculate the direction (vector) between the player and the mouse
             Vector2 desiredDirection = (mousePos - playerPos).normalized;
 
@@ -32,8 +35,8 @@ public class movement : MonoBehaviour
             Vector2 pushDirection = -desiredDirection;
 
             // Smooth transition for speed based on the distance (further = slower)
-            float distanceFactor = Mathf.Clamp01(distance / maxSpeed);  // Scales as distance increases
-            float currentSpeed = Mathf.Lerp(maxSpeed, minSpeed, distanceFactor); // Smooth speed transition
+            float distanceFactor = Mathf.Clamp01(distance / maxSpeed);
+            float currentSpeed = Mathf.Lerp(maxSpeed, minSpeed, distanceFactor);
 
             // Smoothly apply the push direction and the current speed to velocity
             velocity = Vector2.Lerp(velocity, pushDirection * currentSpeed, accelerationFactor);
@@ -46,22 +49,30 @@ public class movement : MonoBehaviour
         }
         else
         {
-            float distanceFactor = Mathf.Clamp01(distance / maxSpeed);  // Scales as distance increases
-            float currentSpeed = Mathf.Lerp(maxSpeed, minSpeed, distanceFactor); // Smooth speed transition
-
-            // Smoothly apply the push direction and the current speed to velocity
-            velocity = Vector2.Lerp(velocity, pushDirection * currentSpeed, accelerationFactor);
-
-            // Ensure that we do not exceed max speed
-            if (velocity.magnitude > maxSpeed)
+            if (decelTime > 0)
             {
-                velocity = velocity.normalized * maxSpeed;
+                decelTime--;
+                Debug.Log(decelTime);
+            }
+            else
+            {
+                float distanceFactor = Mathf.Clamp01(distance / maxSpeed);
+                float currentSpeed = Mathf.Lerp(maxSpeed, minSpeed, distanceFactor);
+
+                // Smoothly apply the push direction and the current speed to velocity
+                velocity = Vector2.Lerp(velocity, pushDirection * currentSpeed, accelerationFactor);
+
+                // Ensure that we do not exceed max speed
+                if (velocity.magnitude > maxSpeed)
+                {
+                    velocity = velocity.normalized * maxSpeed;
+                }
+                
             }
         }
-
         // Move the player based on the velocity
         transform.position += (Vector3)(velocity * Time.deltaTime);
-    }
+    } 
 
     // Helper function to get the mouse position relative to the Camera
     private Vector2 GetMouseWorldPosition()
