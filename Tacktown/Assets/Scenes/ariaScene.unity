@@ -174,8 +174,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 529190679}
-  lines: []
-  textSpeed: 0
+  lines:
+  - "It always starts with a woman. My woman\u2019s name was Michelle. She was my
+    belle"
+  - 'Word on the street is they keeping her in the (name of shady place), the prickliest
+    club in Tack Town.  '
+  - "It\u2019s not gonna be pretty. It\u2019s not gonna be clean. But I owe at least
+    her this much. "
+  textSpeed: 0.05
 --- !u!114 &26724663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +255,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1340, y: 200}
+  m_SizeDelta: {x: 1400, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529190679
 MonoBehaviour:
