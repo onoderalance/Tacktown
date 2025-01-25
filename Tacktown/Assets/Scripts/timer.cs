@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class timer : MonoBehaviour
 {
-    public float timeElapsed = 0.0f;
-    public bool timerActive = false;
+    private float timeElapsed = 0.0f;
+    private bool timerActive = false;
 
     // Start is called before the first frame update
     void Start()
