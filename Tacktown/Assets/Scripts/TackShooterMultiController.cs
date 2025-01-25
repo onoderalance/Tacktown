@@ -32,20 +32,20 @@ public class TackShooterMultiController : MonoBehaviour
     void spawnProjectiles(float speed)
     {
 
-        Vector3 spawnPosition1 = transform.position + new Vector3(0, spawnOffset, 0);
-        GameObject newProjectile1 = Instantiate(projectile, spawnPosition1, transform.rotation);
+        Vector3 spawnPosition1 = (transform.position + new Vector3(0, spawnOffset, 0));
+        GameObject newProjectile1 = Instantiate(projectile, transform.position + transform.up * spawnOffset, transform.rotation);
         newProjectile1.GetComponent<TackProjectileScript>().speed = speed;
 
         //determine offset position of this projectile
         Vector3 spawnPosition2 = transform.position + new Vector3(-spawnOffset, 0, 0);
         //determine rotation of 2nd projectile
         Quaternion rotationProjectile2 = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0,0,90));
-        GameObject newProjectile2 = Instantiate(projectile, spawnPosition2, rotationProjectile2);
+        GameObject newProjectile2 = Instantiate(projectile, transform.position - transform.right * spawnOffset, rotationProjectile2);
         newProjectile2.GetComponent<TackProjectileScript>().speed = speed;
 
         Vector3 spawnPosition3 = transform.position + new Vector3(spawnOffset, 0, 0);
         Quaternion rotationProjectile3 = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90));
-        GameObject newProjectile3 = Instantiate(projectile, spawnPosition3, rotationProjectile3);
+        GameObject newProjectile3 = Instantiate(projectile, transform.position + transform.right * spawnOffset, rotationProjectile3);
         newProjectile3.GetComponent<TackProjectileScript>().speed = speed;
     }
 
