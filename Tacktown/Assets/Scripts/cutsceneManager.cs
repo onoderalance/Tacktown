@@ -9,6 +9,7 @@ public class cutsceneManager : MonoBehaviour
     public dialogue dialogueMain;
     public dialogue dialogueCenter;
     public GameObject fadeBlock;
+    public AudioSource audioSource;
 
     public SpriteRenderer spriteRenderer;
     public Sprite background;
@@ -115,6 +116,8 @@ public class cutsceneManager : MonoBehaviour
         //reset index to playing
         cutsceneIndex = 0;
         currScene = scene;
+        //start audio
+        audioSource.Play();
     }
 
     // Determines what is going on in the current scene
