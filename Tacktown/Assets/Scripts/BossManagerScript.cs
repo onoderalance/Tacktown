@@ -41,8 +41,8 @@ public class BossManagerScript : MonoBehaviour
         public void create() {
             float yPos = -0.5f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
+            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
 
     }
@@ -62,8 +62,8 @@ public class BossManagerScript : MonoBehaviour
         {
             float yPos = -1.78f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
+            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
@@ -82,8 +82,8 @@ public class BossManagerScript : MonoBehaviour
         {
             float xPos = -6.27f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
+            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
@@ -102,8 +102,8 @@ public class BossManagerScript : MonoBehaviour
         {
             float xPos = -14.3f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
+            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
@@ -115,7 +115,7 @@ public class BossManagerScript : MonoBehaviour
     {
 
         attackList = new Dictionary<int, List<Attack>> {
-            [3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f) },
+            //[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f) },
         };
 
     }
@@ -139,11 +139,11 @@ public class BossManagerScript : MonoBehaviour
 
         //if there is an attack on this step:
         if (attackList.ContainsKey(stepCounter)) {
-            currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            for (int i = 0; i <currretnStepAttackList.Count; i++)
-            {
-                currentStepAttacklist[i].create();
-            }
+            //currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
+            //for (int i = 0; i <currretnStepAttackList.Count; i++)
+            //{
+            //    currentStepAttacklist[i].create();
+            //}
         }
     }
 
@@ -181,8 +181,8 @@ public class BossManagerScript : MonoBehaviour
     //fires a single shot at the given y position from the left of the screen rightwards
     void singleShotFromLeft(float yPos)
     {
-        float yPos = -0.5f;
-        Vector3 spawnPosition = new Vector3(xPos, -0.5, 0);
+        float xPos = -0.5f;
+        Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
         GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 
