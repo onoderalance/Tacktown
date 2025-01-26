@@ -13,7 +13,7 @@ public class BossManagerScript : MonoBehaviour
     float preciseTimer = 0.0f; //delta time
     int stepCounter = 0; //increases every (stepTime) seconds
     bool stepUpdated = false;
-    public float stepsPerSecond = 1.0f;
+    public float stepsPerSecond = 2.933f; //8th notes at 88bpm
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
@@ -40,7 +40,57 @@ public class BossManagerScript : MonoBehaviour
 
         attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, projectile) };
         attackList[6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) };
-        attackList[9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) };
+
+        //downbeat of first chorus (measure 5)
+        attackList[33] = new List<Attack> {
+            new SingleShotFromTop(6.0f, 1.5f, projectile),
+            new SingleShotFromLeft(-6.0f, 1.5f, projectile),
+            new SingleShotFromRight(-6.0f, 1.5f, projectile),
+            new SingleShotFromBottom(6.0f, 1.5f, projectile)
+        };
+
+        //measure 7
+        attackList[48] = new List<Attack>();
+        //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
+        new Burst(-3.0f, 2.0f, 4, 57, 1, 0.8f, projectile, attackList,0);
+
+        //measure 8
+        attackList[56] = new List<Attack>();
+        //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
+        new Burst(-1.7f, 2.0f, 4, 65, 1, 0.8f, projectile, attackList,1);
+
+        //measure 9
+        attackList[64] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(90.0f, 3.5f, 2, 64, 1, 180.0f, projectile, attackList);
+
+        //measure 10
+        attackList[72] = new List<Attack> {
+            new SingleShotFromTop(-1.25f, 2.0f, projectile),
+            new SingleShotFromBottom(9.3f, 2.0f, projectile),
+        };
+
+        //measure 11
+        attackList[80] = new List<Attack> {
+            new SingleShotFromRight(0.0f, 2.0f, projectile),
+            new SingleShotFromRight(-10.0f, 2.0f, projectile),
+        };
+
+        //measure 13
+        attackList[96] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(0.0f, 2.0f, 3, 96, 0, 45.0f, projectile, attackList);
+        new BurstFromCenter(180.0f, 2.0f, 3, 96, 0, 45.0f, projectile, attackList);
+
+        //PRECHORUS
+        //measure 15
+        attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, homingMissile) };
+
+
+        //big horn hit at step 162
+        attackList[162] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(0.0f, 3.0f, 8, 162, 0, 45.0f, projectile, attackList);
 
     }
 
@@ -52,9 +102,9 @@ public class BossManagerScript : MonoBehaviour
         //Debug.Log((int)(preciseTimer/stepsPerSecond));
 
         //call onStepUpdate if we have just moved to a new step
-        if ((int)(preciseTimer / stepsPerSecond) != stepCounter)
+        if ((int)(preciseTimer * stepsPerSecond) != stepCounter)
         {
-            stepCounter = (int)(preciseTimer / stepsPerSecond);
+            stepCounter = (int)(preciseTimer * stepsPerSecond);
             Debug.Log(stepCounter);
             onStepUpdate();
         }
@@ -70,10 +120,10 @@ public class BossManagerScript : MonoBehaviour
         {
             //print("CONTAINS KEY");
             List<Attack> currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            //print(currentStepAttackList);
+            print("current step attack list count: " + currentStepAttackList.Count);
             for (int i = 0; i < currentStepAttackList.Count; i++)
             {
-                //print("i: " + i);
+                print("i: " + i);
                 currentStepAttackList[i].create();
             }
         }
@@ -100,7 +150,7 @@ public class BossManagerScript : MonoBehaviour
         }
 
         public override void create() {
-            float yPos = 1.0f;
+            float yPos = 5.65f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
             newProjectile.GetComponent<BossProjectileScript>().speed = speed;
@@ -123,7 +173,7 @@ public class BossManagerScript : MonoBehaviour
 
         public override void create()
         {
-            float yPos = -1.78f;
+            float yPos = -15.6f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
             newProjectile.GetComponent<TackProjectileScript>().speed = speed;
@@ -148,7 +198,15 @@ public class BossManagerScript : MonoBehaviour
             float xPos = -6.27f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
+            
         }
     }
 
@@ -167,7 +225,7 @@ public class BossManagerScript : MonoBehaviour
 
         public override void create()
         {
-            float xPos = -14.3f;
+            float xPos = 14.3f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
             //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
@@ -236,6 +294,7 @@ public class BossManagerScript : MonoBehaviour
                 if (attackList.ContainsKey(currentStep))
                 {
                     List<Attack> currentAttackList = attackList[currentStep];
+                    //print("list for step: " + currentStep + " " + currentAttackList + " length " + currentAttackList.Count);
                     currentAttackList.Add(newShot);
                 } else {
                     attackList[currentStep] = new List<Attack> { newShot };
@@ -249,6 +308,80 @@ public class BossManagerScript : MonoBehaviour
         }
 
 
+    }
+
+    class Burst: Attack
+    {
+        private float xPos;
+        private float speed;
+        private GameObject projectile;
+        private float timeOffset;
+        private float xOffset;
+
+        public Burst(float startPos, float speed, int numShots, int stepCounter, int timeOffset, float posOffset, GameObject projectile, Dictionary<int, List<Attack>> attackList, int direction)
+        {
+
+            if (attackList == null)
+            {
+                throw new ArgumentNullException(nameof(attackList), "The attack list cannot be null.");
+            }
+
+            if (projectile == null)
+            {
+                throw new ArgumentNullException(nameof(projectile), "The projectile cannot be null.");
+            }
+
+            if (numShots <= 0)
+            {
+                throw new ArgumentException("The number of shots must be greater than zero.", nameof(numShots));
+            }
+
+            if (timeOffset < 0)
+            {
+                throw new ArgumentException("Time offset cannot be negative.", nameof(timeOffset));
+            }
+
+            Vector3 centerPosition = new Vector3(4, -6, 0);
+
+            //add all burst shots
+            for (int i = 0; i < numShots; i++)
+            {
+                int currentStep = stepCounter + i * timeOffset;
+                //if the key exists, append to it. otherwise, create a new list
+                Attack newShot = new SingleShotFromTop(startPos + i * posOffset, speed, projectile);
+                switch (direction)
+                {
+                    case 0:
+                        newShot = new SingleShotFromTop(startPos + i * posOffset, speed, projectile);
+                        break;
+                    case 1:
+                        newShot = new SingleShotFromLeft(startPos + i * posOffset, speed, projectile);
+                        break;
+                    case 2:
+                        newShot = new SingleShotFromBottom(startPos + i * posOffset, speed, projectile);
+                        break;
+                    case 3:
+                        newShot = new SingleShotFromRight(startPos + i * posOffset, speed, projectile);
+                        break;
+
+                }
+                if (attackList.ContainsKey(currentStep))
+                {
+                    List<Attack> currentAttackList = attackList[currentStep];
+                    currentAttackList.Add(newShot);
+                }
+                else
+                {
+                    attackList[currentStep] = new List<Attack> { newShot };
+                }
+
+            }
+        }
+
+        public override void create()
+        {
+            //don't need to do anything here
+        }
     }
 
 
