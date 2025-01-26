@@ -174,7 +174,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 160
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1600, y: 1440}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -202,7 +202,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &181138845
 RectTransform:
@@ -310,8 +310,8 @@ Transform:
   m_GameObject: {fileID: 793915549}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -560, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.26770833}
+  m_LocalPosition: {x: 0, y: -560, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 181138845}
@@ -560,6 +560,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3118479225233024802, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_text
       value: "It\u2019s not gonna be pretty. It\u2019s not gonna be clean. "
@@ -600,8 +604,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: dialogueCenter
       objectReference: {fileID: 0}
+    - target: {fileID: 5938862384707639620, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300847528813551113, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153170334914135878, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -809,6 +821,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 181138845}
     m_Modifications:
+    - target: {fileID: 771696842378091273, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
       value: "My woman\u2019s name was Michelle."
@@ -835,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00048851967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -887,7 +903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281503055943616409, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2281503055943616409, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_LocalRotation.w
@@ -923,6 +939,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281503055943616409, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118479225233024802, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4874856539768469886, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
@@ -965,8 +985,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: dialogueMain
       objectReference: {fileID: 0}
+    - target: {fileID: 5938862384707639620, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6300847528813551113, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153170334914135878, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
