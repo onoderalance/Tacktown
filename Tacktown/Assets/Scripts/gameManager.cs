@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
-    public GameObject gameOverScreen;
+    //public GameObject gameOverScreen;
+    public GameOverScreen gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
     {
         //SceneManager.LoadScene("Level");
-        gameOverScreen.SetActive(false);
+        //gameOverScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,11 +25,12 @@ public class gameManager : MonoBehaviour
     {
         print("RESTART CLICKED");
         SceneManager.LoadScene("Level");
-        gameOverScreen.SetActive(false);
+        //gameOverScreen.SetActive(false);
     }
 
     public void gameOver()
     {
-        gameOverScreen.SetActive(true);
+        //gameOverScreen.SetActive(true);
+        gameOverScreen.Setup();
     }
 }
