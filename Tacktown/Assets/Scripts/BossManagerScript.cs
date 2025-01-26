@@ -13,7 +13,7 @@ public class BossManagerScript : MonoBehaviour
     float preciseTimer = 0.0f; //delta time
     int stepCounter = 0; //increases every (stepTime) seconds
     bool stepUpdated = false;
-    public float stepsPerSecond = 1.0f;
+    public float stepsPerSecond = 2.933f; //8th notes at 88bpm
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
@@ -40,7 +40,15 @@ public class BossManagerScript : MonoBehaviour
 
         attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, projectile) };
         attackList[6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) };
-        attackList[9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) };
+
+        //downbeat of first chorus (measure 5)
+        attackList[33] = new List<Attack> {
+            new SingleShotFromTop(1.5f, 2.0f, projectile) };
+
+        //big horn hit at step 162
+        attackList[162] = new List<Attack>();
+        //start angle, speed, 
+        new BurstFromCenter(0.0f, 2.0f, 8, 162, 0, 45.0f, projectile, attackList);
 
     }
 
@@ -52,9 +60,9 @@ public class BossManagerScript : MonoBehaviour
         //Debug.Log((int)(preciseTimer/stepsPerSecond));
 
         //call onStepUpdate if we have just moved to a new step
-        if ((int)(preciseTimer / stepsPerSecond) != stepCounter)
+        if ((int)(preciseTimer * stepsPerSecond) != stepCounter)
         {
-            stepCounter = (int)(preciseTimer / stepsPerSecond);
+            stepCounter = (int)(preciseTimer * stepsPerSecond);
             Debug.Log(stepCounter);
             onStepUpdate();
         }
@@ -70,10 +78,10 @@ public class BossManagerScript : MonoBehaviour
         {
             //print("CONTAINS KEY");
             List<Attack> currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            //print(currentStepAttackList);
+            print("current step attack list count: " + currentStepAttackList.Count);
             for (int i = 0; i < currentStepAttackList.Count; i++)
             {
-                //print("i: " + i);
+                print("i: " + i);
                 currentStepAttackList[i].create();
             }
         }
@@ -236,6 +244,7 @@ public class BossManagerScript : MonoBehaviour
                 if (attackList.ContainsKey(currentStep))
                 {
                     List<Attack> currentAttackList = attackList[currentStep];
+                    //print("list for step: " + currentStep + " " + currentAttackList + " length " + currentAttackList.Count);
                     currentAttackList.Add(newShot);
                 } else {
                     attackList[currentStep] = new List<Attack> { newShot };
