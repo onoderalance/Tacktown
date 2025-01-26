@@ -43,11 +43,21 @@ public class BossManagerScript : MonoBehaviour
 
         //downbeat of first chorus (measure 5)
         attackList[33] = new List<Attack> {
-            new SingleShotFromTop(1.5f, 2.0f, projectile) };
+            new SingleShotFromTop(6.0f, 1.5f, projectile),
+            new SingleShotFromLeft(-6.0f, 1.5f, projectile),
+            new SingleShotFromRight(-6.0f, 1.5f, projectile),
+            new SingleShotFromBottom(6.0f, 1.5f, projectile)
+        };
+
+        //measure 7
+        attackList[57] = new List<Attack>();
+        //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
+        new BurstFromTop(-3.0f, 5.0f, 4, 57, 1, 0.8f, projectile, attackList);
+
 
         //big horn hit at step 162
         attackList[162] = new List<Attack>();
-        //start angle, speed, 
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
         new BurstFromCenter(0.0f, 2.0f, 8, 162, 0, 45.0f, projectile, attackList);
 
     }
@@ -156,7 +166,15 @@ public class BossManagerScript : MonoBehaviour
             float xPos = -6.27f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
+            
         }
     }
 
@@ -258,6 +276,64 @@ public class BossManagerScript : MonoBehaviour
         }
 
 
+    }
+
+    class BurstFromTop : Attack
+    {
+        private float xPos;
+        private float speed;
+        private GameObject projectile;
+        private float timeOffset;
+        private float xOffset;
+
+        public BurstFromTop(float xPos, float speed, int numShots, int stepCounter, int timeOffset, float xOffset, GameObject projectile, Dictionary<int, List<Attack>> attackList)
+        {
+
+            if (attackList == null)
+            {
+                throw new ArgumentNullException(nameof(attackList), "The attack list cannot be null.");
+            }
+
+            if (projectile == null)
+            {
+                throw new ArgumentNullException(nameof(projectile), "The projectile cannot be null.");
+            }
+
+            if (numShots <= 0)
+            {
+                throw new ArgumentException("The number of shots must be greater than zero.", nameof(numShots));
+            }
+
+            if (timeOffset < 0)
+            {
+                throw new ArgumentException("Time offset cannot be negative.", nameof(timeOffset));
+            }
+
+            Vector3 centerPosition = new Vector3(4, -6, 0);
+
+            //add all burst shots
+            for (int i = 0; i < numShots; i++)
+            {
+                int currentStep = stepCounter + i * timeOffset;
+                //if the key exists, append to it. otherwise, create a new list
+                SingleShotFromTop newShot = new SingleShotFromTop(xPos + i * xOffset, speed, projectile);
+                if (attackList.ContainsKey(currentStep))
+                {
+                    List<Attack> currentAttackList = attackList[currentStep];
+                    currentAttackList.Add(newShot);
+                }
+                else
+                {
+                    attackList[currentStep] = new List<Attack> { newShot };
+                }
+
+            }
+        }
+
+        public override void create()
+        {
+            //don't need to do anything here
+        }
     }
 
 
