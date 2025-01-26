@@ -16,7 +16,7 @@ public class dialogue : MonoBehaviour
     public AudioSource audioSource;
     public bool useBubbleAudio = true; // choose which audio to use
 
-    public bool isActive = true; //determines if the given text box is active
+    public bool isActive = false; //determines if the given text box is active
     public bool canSkip = true; //determiens if the player is able to skip the current text
 
     private Coroutine typingCoroutine; // Store the current typing coroutine for control
@@ -24,7 +24,6 @@ public class dialogue : MonoBehaviour
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialogue();
     }
 
     void Update()
@@ -81,6 +80,8 @@ public class dialogue : MonoBehaviour
             typingCoroutine = null;
             StopAudio();
         }
+        //clear text
+        textComponent.text = string.Empty;
         isActive = false;
     }
 
