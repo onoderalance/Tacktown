@@ -21,7 +21,7 @@ public class gameManager : MonoBehaviour
 
     public void restartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Level");
     }
 
     public void gameOver()
