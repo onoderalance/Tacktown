@@ -116,9 +116,31 @@ public class BossManagerScript : MonoBehaviour
 
         //measure 24
         attackList[200] = new List<Attack>();
-        new Burst(9.0f, 2.0f, 3, 178, 2, -6.0f, projectile, attackList, 2);
+        new Burst(9.0f, 2.0f, 3, 200, 2, -6.0f, projectile, attackList, 2);
 
+        //measure 25
+        attackList[208] = new List<Attack>();
+        new Burst(-3.6f, 2.0f, 4, 208, 2, 6.0f, projectile, attackList, 0);
 
+        //measure 26 horn hits
+        attackList[216] = new List<Attack>();
+        new Burst(-12.0f, 2.0f, 3, 216, 2, 6.0f, projectile, attackList, 3);
+
+        //measure 27
+        attackList[224] = new List<Attack>();
+        new BurstFromCenter(0.0f, 2.0f, 3, 224, 1, 45.0f, homingMissile, attackList);
+
+        //measure 28
+        attackList[232] = new List<Attack>();
+        new BurstFromCenter(45.0f, 2.0f, 4, 232, 1, 90.0f, projectile, attackList);
+
+        //measure 29
+        attackList[240] = new List<Attack>();
+        new Burst(9.0f, 2.0f, 3, 240, 2, -6.0f, projectile, attackList, 2);
+
+        //mesaure 32
+        attackList[256] = new List<Attack>();
+        new Burst(9.0f, 2.0f, 3, 256, 2, -6.0f, projectile, attackList, 3);
 
         //VERSE
         //measure 36
@@ -162,7 +184,7 @@ public class BossManagerScript : MonoBehaviour
         //measure 43
         attackList[336] = new List<Attack>();
         //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
-        new Burst(-1.7f, 2.0f, 4, 336, 1, 0.8f, projectile, attackList, 1);
+        new Burst(-1.7f, 2.5f, 4, 336, 2, 0.8f, projectile, attackList, 1);
 
         //measure 44
         attackList[342] = new List<Attack>();
@@ -197,24 +219,34 @@ public class BossManagerScript : MonoBehaviour
         new BurstFromCenter(0.0f, 3.0f, 8, 400, 0, 45.0f, projectile, attackList);
 
         //measure 52 horn hits
-        attackList[508] = new List<Attack>();
+        attackList[408] = new List<Attack>();
         new Burst(-3.6f, 2.0f, 3, 508, 2, 6.0f, projectile, attackList, 0);
 
         //measure 53 horn hits
-        attackList[516] = new List<Attack>();
+        attackList[416] = new List<Attack>();
         new Burst(-12.0f, 2.0f, 3, 516, 2, 6.0f, projectile, attackList, 3);
 
         //measure 54
-        attackList[524] = new List<Attack>();
-        new BurstFromCenter(0.0f, 2.0f, 3, 524 1, 45.0f, homingMissile, attackList);
+        attackList[424] = new List<Attack>();
+        new BurstFromCenter(0.0f, 2.0f, 3, 524, 1, 45.0f, homingMissile, attackList);
 
         //measure 55
-        attackList[532] = new List<Attack>();
+        attackList[432] = new List<Attack>();
         new BurstFromCenter(45.0f, 2.0f, 4, 532, 1, 90.0f, projectile, attackList);
 
         //measure 56
-        attackList[540] = new List<Attack>();
+        attackList[440] = new List<Attack>();
         new Burst(9.0f, 2.0f, 3, 540, 2, -6.0f, projectile, attackList, 2);
+
+        //measure 57
+        attackList[448] = new List<Attack>();
+        new BurstFromCenter(0.0f, 2.0f, 8, 548, 4, 40.0f, projectile, attackList);
+
+        //measure 60
+        attackList[472] = new List<Attack> {
+            new SingleShotFromBottom(0.0f, 3.0f, homingMissile),
+        };
+
     }
 
     // Update is called once per frame
@@ -271,6 +303,7 @@ public class BossManagerScript : MonoBehaviour
                 currentStepAttackList[i].create();
             }
         }
+
     }
 
     public abstract class Attack {
