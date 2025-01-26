@@ -24,9 +24,10 @@ public class BossManagerScript : MonoBehaviour
             //can be called by any attack child to add it to the game world
         }
 
+
     }
 
-    private class SingleShotFromTop : Attack
+    private class SingleShotFromTop
     {
         private float xPos;
         private float speed;
@@ -138,10 +139,10 @@ public class BossManagerScript : MonoBehaviour
 
         //if there is an attack on this step:
         if (attackList.ContainsKey(stepCounter)) {
-            var currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            for (int i = 0; i < currentStepAttackList.Count; i++)
+            currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
+            for (int i = 0; i <currretnStepAttackList.Count; i++)
             {
-                currentStepAttackList[i].create();
+                currentStepAttacklist[i].create();
             }
         }
     }
@@ -181,7 +182,7 @@ public class BossManagerScript : MonoBehaviour
     void singleShotFromLeft(float yPos)
     {
         float yPos = -0.5f;
-        Vector3 spawnPosition = new Vector3(xPos, -0.5f, 0.0f);
+        Vector3 spawnPosition = new Vector3(xPos, -0.5, 0);
         GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
     }
 
