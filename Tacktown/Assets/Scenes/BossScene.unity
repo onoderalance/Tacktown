@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &260238881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5853833625276393634, guid: c328ea279126a407abdbb7c3c6ace7d0, type: 3}
+  m_PrefabInstance: {fileID: 2058316073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1039082100
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254096944}
-  - component: {fileID: 1254096943}
+  - component: {fileID: 1254096945}
   m_Layer: 0
   m_Name: BossFightManager
   m_TagString: Untagged
@@ -274,22 +279,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1254096943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254096942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e026c022915d242b4a957a2b90653f51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 2571012545745669100, guid: 85bccbb40f17442d280f0ff786831aaa, type: 3}
-  homingMissile: {fileID: 1304074188222120148, guid: 2070fc75c23944cb983d055528ee6ec5, type: 3}
-  rotatingSpike: {fileID: 4179432549407190459, guid: a86225212883b4f16b4f7def689af128, type: 3}
-  stepsPerSecond: 1
 --- !u!4 &1254096944
 Transform:
   m_ObjectHideFlags: 0
@@ -305,6 +294,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1254096945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254096942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e026c022915d242b4a957a2b90653f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 2571012545745669100, guid: 85bccbb40f17442d280f0ff786831aaa, type: 3}
+  homingMissile: {fileID: 260238881}
+  rotatingSpike: {fileID: 1704594621}
+  stepsPerSecond: 1
 --- !u!1001 &1415408877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,6 +497,68 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
+--- !u!1001 &1669965897
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.978647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3228846
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190457, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179432549407190459, guid: a86225212883b4f16b4f7def689af128, type: 3}
+      propertyPath: m_Name
+      value: RotatingSpikeRod
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a86225212883b4f16b4f7def689af128, type: 3}
+--- !u!1 &1704594621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4179432549407190459, guid: a86225212883b4f16b4f7def689af128, type: 3}
+  m_PrefabInstance: {fileID: 1669965897}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1727608603
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,3 +1062,4 @@ SceneRoots:
   - {fileID: 2058316073}
   - {fileID: 446845635990052110}
   - {fileID: 1254096944}
+  - {fileID: 1669965897}
