@@ -23,6 +23,8 @@ public class BossProjectileScript : MonoBehaviour
     void Update()
     {
 
+        timer += Time.deltaTime;
+
         //move it forward
         transform.position += transform.up * Time.deltaTime * -speed;
 
@@ -35,7 +37,6 @@ public class BossProjectileScript : MonoBehaviour
 
         if (timer > timeAlive)
         {
-
             Destroy(gameObject);
 
         }
