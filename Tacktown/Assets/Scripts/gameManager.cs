@@ -38,4 +38,12 @@ public class gameManager : MonoBehaviour
         print("GOAL REACHED");
         SceneManager.LoadScene("CutsceneBetray");
     }
+
+    public void restartBoss()
+    {
+        print("BOSS");
+        SceneManager.LoadScene("BossScene");
+        gameOverScreen.SetActive(false);
+        m.bubleIsAlive = true;
+    }
 }
