@@ -197,7 +197,7 @@ public class BossManagerScript : MonoBehaviour
         private float angleOffset;
 
         public BurstFromCenter(float angle, float speed, int numShots, int stepCounter, int timeOffset, float angleOffset, GameObject projectile, Dictionary<int, List<Attack>> attackList) {
-
+                
             Vector3 centerPosition = new Vector3(4, -6, 0);
 
             //add all burst shots
