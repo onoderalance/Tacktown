@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1958411459902149359}
   - component: {fileID: 7332449598600339075}
   - component: {fileID: 7798662766222086133}
-  - component: {fileID: 742216997095294689}
   - component: {fileID: 1534029860101298556}
   - component: {fileID: 6601391253418719106}
+  - component: {fileID: -791931310898868961}
   m_Layer: 0
   m_Name: BossHomingMissile
   m_TagString: sharp
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  playerPosition: {fileID: 0}
 --- !u!61 &7798662766222086133
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -94,33 +95,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.04}
   m_EdgeRadius: 0
---- !u!50 &742216997095294689
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304074188222120148}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!114 &1534029860101298556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +163,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-791931310898868961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304074188222120148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a582b309a8354546876dc9105b42c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  playerPosition: {fileID: 0}
+  timeAlive: 5
+  hits: 2

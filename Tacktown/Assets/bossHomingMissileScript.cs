@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomingMissileScript : MonoBehaviour
+public class bossHomingMissileScript : MonoBehaviour
 {
-
     public float speed = 1.0f;
     public Transform playerPosition;
     public float timeAlive = 5.0f;
@@ -13,7 +12,7 @@ public class HomingMissileScript : MonoBehaviour
     float detonationTime = 2.0f;
     float rangeFromPlayer = 30.0f;
     float timer = 0.0f;
-    public int hits = 1;
+    public int hits = 2;
 
     SpriteRenderer sprite;
 
@@ -41,32 +40,31 @@ public class HomingMissileScript : MonoBehaviour
         trackTimeAlive();
     }
 
-    void trackTimeAlive() {
+    void trackTimeAlive()
+    {
         //see if timer has expired. If it has, initiate self destruct sequence
         if (timer > timeAlive)
         {
             sprite.color = Color.red;
             //flash colors
-            if ((int)(timer*2) % 2 == 0)
+            if ((int)(timer * 2) % 2 == 0)
             {
                 sprite.color = Color.red;
-            } else
+            }
+            else
             {
                 sprite.color = Color.white;
             }
-            
+
         }
 
         //if it has been detonating for long enough, delete itself
         if (timer > timeAlive + detonationTime)
         {
-            hits--;
-            if (hits == 0)
-            {
-                Destroy(gameObject);
-            }
-        }
+            
+            Destroy(gameObject);
 
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -81,5 +79,4 @@ public class HomingMissileScript : MonoBehaviour
         }
 
     }
-
 }

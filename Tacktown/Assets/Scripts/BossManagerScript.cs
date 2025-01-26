@@ -13,7 +13,7 @@ public class BossManagerScript : MonoBehaviour
     float preciseTimer = 0.0f; //delta time
     int stepCounter = 0; //increases every (stepTime) seconds
     bool stepUpdated = false;
-    public float stepsPerSecond = 2.933f; //8th notes at 88bpm
+    public double stepsPerSecond = 2.9333; //8th notes at 88bpm
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
@@ -38,8 +38,7 @@ public class BossManagerScript : MonoBehaviour
 
         attackList = new Dictionary<int, List<Attack>>();
 
-        attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, projectile) };
-        attackList[6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) };
+        attackList[9] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
         //downbeat of first chorus (measure 5)
         attackList[33] = new List<Attack> {
@@ -84,8 +83,10 @@ public class BossManagerScript : MonoBehaviour
 
         //PRECHORUS
         //measure 15
-        attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, homingMissile) };
+        attackList[112] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
+        //measure 17
+        attackList[112] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
         //big horn hit at step 162
         attackList[162] = new List<Attack>();
@@ -153,7 +154,14 @@ public class BossManagerScript : MonoBehaviour
             float yPos = 5.65f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
-            newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
         }
 
     }
@@ -176,7 +184,15 @@ public class BossManagerScript : MonoBehaviour
             float yPos = -15.6f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
+            
         }
     }
 
@@ -227,8 +243,15 @@ public class BossManagerScript : MonoBehaviour
         {
             float xPos = 14.3f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
-            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
         }
     }
 
@@ -249,6 +272,14 @@ public class BossManagerScript : MonoBehaviour
         {
             Vector3 centerPosition = new Vector3(4, -6, 0);
             GameObject newProjectile = Instantiate(projectile, centerPosition, Quaternion.Euler(0, 0, angle));
+            try
+            {
+                newProjectile.GetComponent<BossProjectileScript>().speed = speed;
+            }
+            catch
+            {
+                //do nothing
+            }
         }
 
     }
