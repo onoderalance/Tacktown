@@ -12,6 +12,8 @@ public class cutsceneManager : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Sprite background;
+    public Sprite title;
+    public Sprite subtitle;
     public Sprite sprite1;
     public Sprite sprite2;
 
@@ -122,25 +124,40 @@ public class cutsceneManager : MonoBehaviour
         {
             case 1: //intro scene
                 switch (cutsceneIndex)
-                { 
-                    case 0: //it always starts...
-                        switchFrame(1, 0);
+                {
+                    case 0: //title
+                        switchFrame(0, -1);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 1: //black 1
+                        switchFrame(2, -1);
+                        autoTimeToNext(1.0f);
+                        break;
+                    case 2: //subtitle
+                        switchFrame(1, -1);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 3: //black 2
+                        switchFrame(2, -1);
+                        autoTimeToNext(1.0f);
+                        break;
+                    case 4: //it always starts...
+                        switchFrame(3, 0);
                         autoTimeToNext(5.0f);
                         break;
-                    case 1: //My woman...
-                        switchFrame(2, 0);
+                    case 5: //My woman...
+                        switchFrame(4, 0);
                         autoTimeToNext(3.0f);
                         break;
-                    case 2: //She was my belle.
-                        switchFrame(2, 1);
+                    case 6: //She was my belle.
+                        switchFrame(4, 1);
                         autoTimeToNext(2.0f);
                         startFade(1.5f, true);
                         break;
-                    case 3: //It's not going to be pretty...
-                        switchFrame(3, 2);
+                    case 7: //It's not going to be pretty...
+                        switchFrame(5, 2);
                         autoTimeToNext(3.0f);
-                        //setFadeAlpha(0.0f);
-                        startFade(1.5f, true);
+                        startFade(1.0f, true);
                         break;
 
                 }
@@ -163,25 +180,44 @@ public class cutsceneManager : MonoBehaviour
     }
 
     // Switch visual frame shown for the cutscenes, starting dialogue from given index
+    // frame as -1 when no dialogue is given
     void switchFrame(int scene, int frame)
     {
         switch (scene)
         {
-            case 1: //background case, hud should be hidden here
+            case 0: //title
+                spriteRenderer.sprite = title;
+                hudObject.SetActive(false);
+                dialogueMain.PauseDialogue();
+                dialogueCenter.PauseDialogue();
+                break;
+            case 1: //subtitle
+                spriteRenderer.sprite = subtitle;
+                hudObject.SetActive(false);
+                dialogueMain.PauseDialogue();
+                dialogueCenter.PauseDialogue();
+                break;
+            case 2: //background blank
+                spriteRenderer.sprite = background;
+                hudObject.SetActive(false);
+                dialogueMain.PauseDialogue();
+                dialogueCenter.PauseDialogue();
+                break;
+            case 3: //background with text
                 spriteRenderer.sprite = background;
                 hudObject.SetActive(false);
                 dialogueCenter.SkipToLine(frame);
                 dialogueMain.PauseDialogue();
                 currDialogue = dialogueMain;
                 break;
-            case 2:
+            case 4: //backkground 1
                 spriteRenderer.sprite = sprite1;
                 hudObject.SetActive(true);
                 dialogueCenter.PauseDialogue();
                 dialogueMain.SkipToLine(frame);
                 currDialogue = dialogueCenter;
                 break;
-            case 3:
+            case 5: //background 2
                 spriteRenderer.sprite = sprite2;
                 hudObject.SetActive(true);
                 dialogueCenter.PauseDialogue();
