@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class BossManagerScript : MonoBehaviour
 {
@@ -28,12 +29,18 @@ public class BossManagerScript : MonoBehaviour
         //GameObject newProjectile = Instantiate(projectile, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
 
 
-        attackList = new Dictionary<int, List<Attack>>
-        {
-            [3] = new List<Attack> { (SingleShotFromTop)(new SingleShotFromTop(1.5f, 2.0f, projectile)) },
-            [6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) },
-            //[9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) },
-        };
+        //attackList = new Dictionary<int, List<Attack>>
+        //{
+        //    [3] = new List<Attack> { (SingleShotFromTop)(new SingleShotFromTop(1.5f, 2.0f, projectile)) },
+        //    [6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) },
+        //    [9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) },
+        //};
+
+        attackList = new Dictionary<int, List<Attack>>();
+
+        attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, projectile) };
+        attackList[6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) };
+        attackList[9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) };
 
     }
 
@@ -197,6 +204,26 @@ public class BossManagerScript : MonoBehaviour
         private float angleOffset;
 
         public BurstFromCenter(float angle, float speed, int numShots, int stepCounter, int timeOffset, float angleOffset, GameObject projectile, Dictionary<int, List<Attack>> attackList) {
+
+            if (attackList == null)
+            {
+                throw new ArgumentNullException(nameof(attackList), "The attack list cannot be null.");
+            }
+
+            if (projectile == null)
+            {
+                throw new ArgumentNullException(nameof(projectile), "The projectile cannot be null.");
+            }
+
+            if (numShots <= 0)
+            {
+                throw new ArgumentException("The number of shots must be greater than zero.", nameof(numShots));
+            }
+
+            if (timeOffset < 0)
+            {
+                throw new ArgumentException("Time offset cannot be negative.", nameof(timeOffset));
+            }
 
             Vector3 centerPosition = new Vector3(4, -6, 0);
 
