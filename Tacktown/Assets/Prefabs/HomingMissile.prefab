@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0831a90445c114fa980de52b2261b6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   playerPosition: {fileID: 0}
 --- !u!61 &5000657434107431444
 BoxCollider2D:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b981f370c37da4b2cad92935609fd4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 3
   playerPosition: {fileID: 0}
   timeAlive: 5
   hits: 1
