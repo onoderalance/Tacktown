@@ -305,7 +305,7 @@ public class BossManagerScript : MonoBehaviour
             }
         }
 
-        if (stepCounter >= 50)
+        if (stepCounter >= 520)
         {
             SceneManager.LoadScene(sceneName: "CutsceneEnd");
         }
