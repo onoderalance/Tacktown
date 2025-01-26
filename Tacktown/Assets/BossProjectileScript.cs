@@ -39,10 +39,12 @@ public class BossProjectileScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("wall"))
         {
+            print("collision hits down");
             hits--;
             if (hits == 0)
             {
-                Destroy(gameObject);
+                print("DESTROY");
+                //Destroy(gameObject);
             }
         }
     }
