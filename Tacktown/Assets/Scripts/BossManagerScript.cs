@@ -31,6 +31,8 @@ public class BossManagerScript : MonoBehaviour
         attackList = new Dictionary<int, List<Attack>>
         {
             [3] = new List<Attack> { (SingleShotFromTop)(new SingleShotFromTop(1.5f, 2.0f, projectile)) },
+            [6] = new List<Attack> { new SingleShotFromCenter(90.0f, 2.0f, projectile) },
+            //[9] = new List<Attack> { new BurstFromCenter(180.0f, 2.0f, 5, stepCounter, 1, 10.0f, projectile, attackList) },
         };
 
     }
@@ -94,7 +96,7 @@ public class BossManagerScript : MonoBehaviour
             float yPos = 1.0f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
-            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            newProjectile.GetComponent<BossProjectileScript>().speed = speed;
         }
 
     }
@@ -165,7 +167,7 @@ public class BossManagerScript : MonoBehaviour
         }
     }
 
-    class singleShotFromCenter:Attack
+    class SingleShotFromCenter:Attack
     {
         private float angle;
         private float speed;
@@ -178,13 +180,50 @@ public class BossManagerScript : MonoBehaviour
             this.projectile = projectile;
         }
 
-        public void create()
+        public override void create()
         {
             Vector3 centerPosition = new Vector3(4, -6, 0);
             GameObject newProjectile = Instantiate(projectile, centerPosition, Quaternion.Euler(0, 0, angle));
         }
 
     }
+
+    class BurstFromCenter:Attack
+    {
+        private float angle;
+        private float speed;
+        private GameObject projectile;
+        private float timeOffset;
+        private float angleOffset;
+
+        public BurstFromCenter(float angle, float speed, int numShots, int stepCounter, int timeOffset, float angleOffset, GameObject projectile, Dictionary<int, List<Attack>> attackList) {
+
+            Vector3 centerPosition = new Vector3(4, -6, 0);
+
+            //add all burst shots
+            for (int i = 0; i < numShots; i++)
+            {
+                int currentStep = stepCounter + i*timeOffset;
+                //if the key exists, append to it. otherwise, create a new list
+                SingleShotFromCenter newShot = new SingleShotFromCenter(angle + i * angleOffset, speed, projectile);
+                if (attackList.ContainsKey(currentStep))
+                {
+                    List<Attack> currentAttackList = attackList[currentStep];
+                    currentAttackList.Add(newShot);
+                } else {
+                    attackList[currentStep] = new List<Attack> { newShot };
+                }
+
+            }
+        }
+
+        public override void create() {
+            //don't need to do anything here
+        }
+
+
+    }
+
 
 
 
@@ -238,11 +277,6 @@ public class BossManagerScript : MonoBehaviour
 
     //SHOTS FROM MIDDLE
     Vector3 centerPosition = new Vector3(4,-6,0);
-
-    void singleShotFromCenter(float angle)
-    {
-        //GameObject newProjectile = Instantiate(projectile, centerPosition, Quaternion.Euler(0, 0, angle));
-    }
 
     void homingMissleFromCenter() {
         //GameObject newProjectile = Instantiate(homingMissile, centerPosition, Quaternion.Euler(0, 0, 0));
