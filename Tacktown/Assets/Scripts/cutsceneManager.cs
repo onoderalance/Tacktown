@@ -17,6 +17,11 @@ public class cutsceneManager : MonoBehaviour
     public Sprite subtitle;
     public Sprite sprite1;
     public Sprite sprite2;
+    public Sprite sprite3;
+    public Sprite sprite3a;
+    public Sprite sprite4;
+
+    public int SceneID; //determines what scene we are running!
 
     int cutsceneIndex = -1; //tracks what part of the cutscene we are at
     int currScene = 0; //tracks currently running scene
@@ -45,7 +50,7 @@ public class cutsceneManager : MonoBehaviour
         dialogueMain.toggleSkip();
         dialogueCenter.toggleSkip();
         resetTimer();
-        startScene(1);
+        startScene(SceneID);
         sceneCheck();
     }
 
@@ -116,8 +121,6 @@ public class cutsceneManager : MonoBehaviour
         //reset index to playing
         cutsceneIndex = 0;
         currScene = scene;
-        //start audio
-        audioSource.Play();
     }
 
     // Determines what is going on in the current scene
@@ -129,6 +132,8 @@ public class cutsceneManager : MonoBehaviour
                 switch (cutsceneIndex)
                 {
                     case 0: //blalck 1
+                        //start audio
+                        audioSource.Play();
                         switchFrame(2, -1);
                         autoTimeToNext(6.04f);
                         break;
@@ -265,8 +270,60 @@ public class cutsceneManager : MonoBehaviour
                 }
                 break;
             case 2:
+                switch (cutsceneIndex)
+                {
+                    case 0: //blalck 1
+                        startFade(2.0f, false);
+                        switchFrame(2, -1);
+                        autoTimeToNext(0.5f);
+                        break;
+                    case 1: //Michelle!
+                        switchFrame(7, 20);
+                        autoTimeToNext(4.0f);
+                        break;
+                    case 2: //Lost me?
+                        switchFrame(7, 21);
+                        autoTimeToNext(2.0f);
+                        break;
+                    case 3: //Aww...
+                        switchFrame(7, 22);
+                        startFade(2.0f, true);
+                        autoTimeToNext(4.0f);
+                        break;
+                    case 4: //You always
+                        switchFrame(3, 6);
+                        autoTimeToNext(5.5f);
+                        break;
+                    case 5: //Im done
+                        switchFrame(6, 23);
+                        startFade(2.0f, false);
+                        autoTimeToNext(3.0f);
+                        break;
+                    case 6: //pop him
+                        switchFrame(6, 24);
+                        autoTimeToNext(4.0f);
+                        break;
+
+                }
                 break;
             case 3:
+                switch (cutsceneIndex)
+                {
+                    case 0: //blalck 1 to buffer
+                        startFade(2.0f, false);
+                        switchFrame(2, -1);
+                        autoTimeToNext(0.5f);
+                        break;
+                    case 1: //I just...
+                        switchFrame(8, 25);
+                        startFade(4.0f, true);
+                        autoTimeToNext(6.0f);
+                        break;
+                    case 2: //Funny how
+                        switchFrame(3, 7);
+                        autoTimeToNext(7.0f);
+                        break;
+                }
                 break;
             case 4:
                 break;
@@ -312,15 +369,36 @@ public class cutsceneManager : MonoBehaviour
                 dialogueMain.PauseDialogue();
                 currDialogue = dialogueMain;
                 break;
-            case 4: //backkground 1
+            case 4: //sprite 1
                 spriteRenderer.sprite = sprite1;
                 hudObject.SetActive(true);
                 dialogueCenter.PauseDialogue();
                 dialogueMain.SkipToLine(frame);
                 currDialogue = dialogueCenter;
                 break;
-            case 5: //background 2
+            case 5: //sprite 2
                 spriteRenderer.sprite = sprite2;
+                hudObject.SetActive(true);
+                dialogueCenter.PauseDialogue();
+                dialogueMain.SkipToLine(frame);
+                currDialogue = dialogueCenter;
+                break;
+            case 6: //sprite 3
+                spriteRenderer.sprite = sprite3;
+                hudObject.SetActive(true);
+                dialogueCenter.PauseDialogue();
+                dialogueMain.SkipToLine(frame);
+                currDialogue = dialogueCenter;
+                break;
+            case 7: //sprite 3a
+                spriteRenderer.sprite = sprite3a;
+                hudObject.SetActive(true);
+                dialogueCenter.PauseDialogue();
+                dialogueMain.SkipToLine(frame);
+                currDialogue = dialogueCenter;
+                break;
+            case 8: //sprite 4
+                spriteRenderer.sprite = sprite4;
                 hudObject.SetActive(true);
                 dialogueCenter.PauseDialogue();
                 dialogueMain.SkipToLine(frame);

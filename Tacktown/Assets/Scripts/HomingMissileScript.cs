@@ -43,7 +43,7 @@ public class HomingMissileScript : MonoBehaviour
 
     void trackTimeAlive() {
         //see if timer has expired. If it has, initiate self destruct sequence
-        if (timer > timeAlive)
+        /*if (timer > timeAlive)
         {
             sprite.color = Color.red;
             //flash colors
@@ -55,7 +55,7 @@ public class HomingMissileScript : MonoBehaviour
                 sprite.color = Color.white;
             }
             
-        }
+        }*/
 
         //if it has been detonating for long enough, delete itself
         if (timer > timeAlive + detonationTime)

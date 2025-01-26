@@ -6,12 +6,14 @@ public class playerHit : MonoBehaviour
 {
     public Rigidbody2D rb;
     public gameManager gm;
+    public movement m; // calls mvmt script
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
+        gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
+        m = FindObjectOfType<movement>();
     }
 
     // Update is called once per frame
@@ -24,8 +26,12 @@ public class playerHit : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("sharp"))
         {
-            // Trigger the game over via gameManager
             gm.gameOver();
+            m.bubleIsAlive = false; // disables player mvmt after game over
+            if (Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                gm.restartGame();
+            }
         }
     }
 }

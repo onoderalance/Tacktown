@@ -24,6 +24,8 @@ public class movement : MonoBehaviour
     private bool inAirstream = false; // Track if the player is in the airstream
     private Vector2 airstreamDirection = Vector2.zero; // Direction of the airstream
 
+    public bool bubleIsAlive = true; // for game over purposes
+
     void Start()
     {
         print("start");
@@ -39,7 +41,7 @@ public class movement : MonoBehaviour
         float distance = Vector2.Distance(playerPos, mousePos);
 
         // When mouse button is held
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && bubleIsAlive)
         {
             decelTime = 5;
 
