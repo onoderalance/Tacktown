@@ -306,8 +306,24 @@ public class cutsceneManager : MonoBehaviour
 
                 }
                 break;
-                break;
             case 3:
+                switch (cutsceneIndex)
+                {
+                    case 0: //blalck 1 to buffer
+                        startFade(2.0f, false);
+                        switchFrame(2, -1);
+                        autoTimeToNext(0.5f);
+                        break;
+                    case 1: //I just...
+                        switchFrame(8, 25);
+                        startFade(5.0f, true);
+                        autoTimeToNext(7.0f);
+                        break;
+                    case 2: //Funny how
+                        switchFrame(3, 7);
+                        autoTimeToNext(7.0f);
+                        break;
+                }
                 break;
             case 4:
                 break;
