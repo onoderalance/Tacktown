@@ -21,6 +21,7 @@ public class HomingMissileScript : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        playerPosition = GameObject.Find("Player").GetComponent<Transform>();
 
     }
 

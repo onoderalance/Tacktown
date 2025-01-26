@@ -7,6 +7,7 @@ public class TackShooterController : MonoBehaviour
 
     public float shootRate = 3.0f;
     public float shootSpeed = 1.0f;
+    public Transform playerPosition;
     public GameObject projectile;
     public float spawnOffset = -1.0f;
     float shotTimer = 0.0f;
