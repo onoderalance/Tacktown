@@ -10,6 +10,8 @@ public class BossProjectileScript : MonoBehaviour
     private Rigidbody2D rb;
     //public GameObject player;
     int hits = 2; //it can hit a wall once (to enter the arena)
+    float timer = 0.0f;
+    float timeAlive = 12.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,8 @@ public class BossProjectileScript : MonoBehaviour
     void Update()
     {
 
+        timer += Time.deltaTime;
+
         //move it forward
         transform.position += transform.up * Time.deltaTime * -speed;
 
@@ -30,6 +34,12 @@ public class BossProjectileScript : MonoBehaviour
         //{
         //    Destroy(gameObject);
         //}
+
+        if (timer > timeAlive)
+        {
+            Destroy(gameObject);
+
+        }
     }
 
 

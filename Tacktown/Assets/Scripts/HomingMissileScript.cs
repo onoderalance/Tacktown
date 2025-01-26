@@ -66,6 +66,20 @@ public class HomingMissileScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("wall"))
+        {
+            hits--;
+            if (hits == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 
 }
