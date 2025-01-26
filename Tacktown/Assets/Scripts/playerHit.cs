@@ -25,7 +25,7 @@ public class playerHit : MonoBehaviour
         if (collision.gameObject.CompareTag("sharp"))
         {
             // Trigger the game over via gameManager
-            gm.gameOver();
+            //gm.gameOver();
         }
     }
 }
