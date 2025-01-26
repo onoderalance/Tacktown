@@ -117,6 +117,8 @@ public class BossManagerScript : MonoBehaviour
         attackList[200] = new List<Attack>();
         new Burst(9.0f, 2.0f, 3, 178, 2, -6.0f, projectile, attackList, 2);
 
+
+
         //VERSE
         //measure 36
         attackList[280] = new List<Attack>();
@@ -185,7 +187,7 @@ public class BossManagerScript : MonoBehaviour
         {
             timeLeftInStep = stepDuration;
             stepCounter++;
-            Debug.Log(stepCounter);
+            //Debug.Log(stepCounter);
             onStepUpdate();
         }
 

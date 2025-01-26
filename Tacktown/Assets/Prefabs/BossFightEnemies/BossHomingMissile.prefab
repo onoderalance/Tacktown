@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1534029860101298556}
   - component: {fileID: 6601391253418719106}
   - component: {fileID: -791931310898868961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BossHomingMissile
   m_TagString: sharp
   m_Icon: {fileID: 0}
