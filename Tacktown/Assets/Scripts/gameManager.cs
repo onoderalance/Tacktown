@@ -35,6 +35,7 @@ public class gameManager : MonoBehaviour
 
     public void mainToPreBoss()
     {
+        print("GOAL REACHED");
         SceneManager.LoadScene("CutsceneBetray");
     }
 }
