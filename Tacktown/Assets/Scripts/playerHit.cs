@@ -11,7 +11,7 @@ public class playerHit : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
+        gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
     }
 
     // Update is called once per frame
@@ -24,8 +24,11 @@ public class playerHit : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("sharp"))
         {
-            // Trigger the game over via gameManager
-            //gm.gameOver();
+            gm.gameOver();
+            if (Input.GetKeyDown(KeyCode.Space) == true)
+            {
+                gm.restartGame();
+            }
         }
     }
 }
