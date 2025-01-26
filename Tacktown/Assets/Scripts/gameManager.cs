@@ -32,4 +32,10 @@ public class gameManager : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
     }
+
+    public void mainToPreBoss()
+    {
+        print("GOAL REACHED");
+        SceneManager.LoadScene("CutsceneBetray");
+    }
 }

@@ -26,10 +26,16 @@ public class movement : MonoBehaviour
 
     public bool bubleIsAlive = true; // for game over purposes
 
+    private AudioSource audioSource;
+    public AudioClip accelerateSound; // Sound for acceleration
+    public AudioClip collisionSound; // Sound for collision
+
     void Start()
     {
         print("start");
         rb = GetComponent<Rigidbody2D>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -43,6 +49,11 @@ public class movement : MonoBehaviour
         // When mouse button is held
         if (Input.GetMouseButton(0) && bubleIsAlive)
         {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play(); // Start playing accelerate sound
+            }
+
             decelTime = 5;
 
             // Calculate the direction (vector) between the player and the mouse
@@ -66,6 +77,12 @@ public class movement : MonoBehaviour
         }
         else
         {
+
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop(); // Stop the accelerate sound when not accelerating
+            }
+
             if (decelTime > 0)
             {
                 decelTime--;
@@ -121,6 +138,12 @@ public class movement : MonoBehaviour
 
             // Reflect across the collision normal (preserve momentum)
             velocity = Vector2.Reflect(velocity, collisionNormal) * bounceFactor;
+
+            // Play collision sound
+            if (collisionSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(collisionSound);
+            }
         }
     }
 

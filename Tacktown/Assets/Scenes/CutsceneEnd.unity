@@ -280,7 +280,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 824114734}
   background: {fileID: 21300000, guid: de8e73b44c024c043a067374ed92717f, type: 3}
   title: {fileID: 21300000, guid: c89d906bfe018ec4eba1e11b3be6f805, type: 3}
-  subtitle: {fileID: 21300000, guid: b35cee152d68020408ba8c62dce04030, type: 3}
+  subtitle: {fileID: 21300000, guid: 70d156a2f55a67a4da30b8f2838b6b02, type: 3}
   sprite1: {fileID: 21300000, guid: 8a9254bf394c4cb459a2157f57d71d4a, type: 3}
   sprite2: {fileID: 21300000, guid: 91f17cfaba2dcc4459853ee0ba44de17, type: 3}
   sprite3: {fileID: 21300000, guid: be3f98594915fc140bc200df5ff5f231, type: 3}
@@ -1281,6 +1281,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348b96142ce154ae28daffdffd9ad271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1620982124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1620982126}
+  - component: {fileID: 1620982125}
+  m_Layer: 0
+  m_Name: PanicButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1620982125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620982124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b84cf0d998657744b05279e91a64415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1620982126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620982124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1912544446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,3 +1402,4 @@ SceneRoots:
   - {fileID: 1205256744}
   - {fileID: 181138845}
   - {fileID: 1912544449}
+  - {fileID: 1620982126}

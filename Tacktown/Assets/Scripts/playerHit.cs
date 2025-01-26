@@ -33,5 +33,11 @@ public class playerHit : MonoBehaviour
                 gm.restartGame();
             }
         }
+
+        if (collision.gameObject.CompareTag("goal"))
+        {
+            print("GOAL REACHED");
+            gm.mainToPreBoss(); // transition to boss scene
+        }
     }
 }
