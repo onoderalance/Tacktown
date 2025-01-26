@@ -18,6 +18,58 @@ public class BossManagerScript : MonoBehaviour
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
                     SHOT_FROM_CENTER, MISSILE_FROM_CENTER};
 
+    Dictionary<int, List<Attack>> attackList; //maps a time to a list of attacks that will happen on this step
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        //projectile = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/BossFightEnemies/BossProjecile.prefab", typeof(GameObject));
+        //GameObject newProjectile = Instantiate(projectile, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
+
+
+        attackList = new Dictionary<int, List<Attack>>
+        {
+            [3] = new List<Attack> { (SingleShotFromTop)(new SingleShotFromTop(1.5f, 2.0f, projectile)) },
+        };
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        preciseTimer += Time.deltaTime;
+
+        //Debug.Log((int)(preciseTimer/stepsPerSecond));
+
+        //call onStepUpdate if we have just moved to a new step
+        if ((int)(preciseTimer / stepsPerSecond) != stepCounter)
+        {
+            stepCounter = (int)(preciseTimer / stepsPerSecond);
+            Debug.Log(stepCounter);
+            onStepUpdate();
+        }
+
+    }
+
+    //only called when the step counter is updated
+    void onStepUpdate()
+    {
+
+        //if there is an attack on this step:
+        if (attackList.ContainsKey(stepCounter))
+        {
+            //print("CONTAINS KEY");
+            List<Attack> currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
+            //print(currentStepAttackList);
+            for (int i = 0; i < currentStepAttackList.Count; i++)
+            {
+                //print("i: " + i);
+                currentStepAttackList[i].create();
+            }
+        }
+    }
+
     public abstract class Attack {
 
         public abstract void create();
@@ -39,7 +91,6 @@ public class BossManagerScript : MonoBehaviour
         }
 
         public override void create() {
-            //print("CREATEEE");
             float yPos = 1.0f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
@@ -52,19 +103,21 @@ public class BossManagerScript : MonoBehaviour
     {
         private float xPos;
         private float speed;
+        private GameObject projectile;
 
-        public SingleShotFromBottom(float xPos, float speed)
+        public SingleShotFromBottom(float xPos, float speed, GameObject projectile)
         {
             this.xPos = xPos;
             this.speed = speed;
+            this.projectile = projectile;
         }
 
         public override void create()
         {
             float yPos = -1.78f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
-            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 180));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
@@ -72,19 +125,21 @@ public class BossManagerScript : MonoBehaviour
     {
         private float yPos;
         private float speed;
+        private GameObject projectile;
 
-        public SingleShotFromLeft(float yPos, float speed)
+        public SingleShotFromLeft(float yPos, float speed, GameObject projectile)
         {
             this.yPos = yPos;
             this.speed = speed;
+            this.projectile = projectile;
         }
 
         public override void create()
         {
             float xPos = -6.27f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
-            //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
-            //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
+            GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 90));
+            newProjectile.GetComponent<TackProjectileScript>().speed = speed;
         }
     }
 
@@ -92,11 +147,13 @@ public class BossManagerScript : MonoBehaviour
     {
         private float yPos;
         private float speed;
+        private GameObject projectile;
 
-        public SingleShotFromRight(float yPos, float speed)
+        public SingleShotFromRight(float yPos, float speed, GameObject projectile)
         {
             this.yPos = yPos;
             this.speed = speed;
+            this.projectile = projectile;
         }
 
         public override void create()
@@ -108,54 +165,25 @@ public class BossManagerScript : MonoBehaviour
         }
     }
 
-
-    Dictionary<int, List<Attack>> attackList; //maps a time to a list of attacks that will happen on this step
-
-    // Start is called before the first frame update
-    void Start()
+    class singleShotFromCenter:Attack
     {
+        private float angle;
+        private float speed;
+        private GameObject projectile;
 
-        //projectile = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/BossFightEnemies/BossProjecile.prefab", typeof(GameObject));
-        //GameObject newProjectile = Instantiate(projectile, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
-
-
-        attackList = new Dictionary<int, List<Attack>> {
-            [3] = new List<Attack> {(SingleShotFromTop)(new SingleShotFromTop(1.5f, 2.0f, projectile)) },
-        };
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        preciseTimer += Time.deltaTime;
-
-        //Debug.Log((int)(preciseTimer/stepsPerSecond));
-
-        //call onStepUpdate if we have just moved to a new step
-        if ((int)(preciseTimer / stepsPerSecond) != stepCounter)
+        public SingleShotFromCenter(float angle, float speed, GameObject projectile)
         {
-            stepCounter = (int)(preciseTimer/stepsPerSecond);
-            Debug.Log(stepCounter);
-            onStepUpdate();
+            this.angle = angle;
+            this.speed = speed;
+            this.projectile = projectile;
         }
 
-    }
-
-    //only called when the step counter is updated
-    void onStepUpdate() {
-
-        //if there is an attack on this step:
-        if (attackList.ContainsKey(stepCounter)) {
-            //print("CONTAINS KEY");
-            List<Attack> currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            //print(currentStepAttackList);
-            for (int i = 0; i < currentStepAttackList.Count; i++)
-            {
-                //print("i: " + i);
-                currentStepAttackList[i].create();
-            }
+        public void create()
+        {
+            Vector3 centerPosition = new Vector3(4, -6, 0);
+            GameObject newProjectile = Instantiate(projectile, centerPosition, Quaternion.Euler(0, 0, angle));
         }
+
     }
 
 
