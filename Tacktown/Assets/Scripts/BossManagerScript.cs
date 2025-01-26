@@ -11,9 +11,11 @@ public class BossManagerScript : MonoBehaviour
     public GameObject rotatingSpike;
 
     float preciseTimer = 0.0f; //delta time
-    int stepCounter = 0; //increases every (stepTime) seconds
-    bool stepUpdated = false;
-    public double stepsPerSecond = 2.9333; //8th notes at 88bpm
+    int stepCounter = 0; //increases every (stepTime) second
+    float stepsPerSecond = (88.0f/60.0f)*2.0f; //8th notes at 88bpm
+    float stepDuration;
+    float nextStepTime;
+    
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
                     BURST_FROM_TOP, BURST_FROM_BOTTOM, BURST_FROM_LEFT, BURST_FROM_RIGHT,
@@ -24,6 +26,9 @@ public class BossManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        stepDuration = 1f / stepsPerSecond;
+        nextStepTime = preciseTimer + stepDuration;
 
         //projectile = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/BossFightEnemies/BossProjecile.prefab", typeof(GameObject));
         //GameObject newProjectile = Instantiate(projectile, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
@@ -88,8 +93,8 @@ public class BossManagerScript : MonoBehaviour
         //measure 17
         attackList[112] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
-        //big horn hit at step 162
-        attackList[162] = new List<Attack>();
+        //big horn hit at step 152
+        attackList[152] = new List<Attack>();
         //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
         new BurstFromCenter(0.0f, 3.0f, 8, 162, 0, 45.0f, projectile, attackList);
 
@@ -102,10 +107,30 @@ public class BossManagerScript : MonoBehaviour
 
         //Debug.Log((int)(preciseTimer/stepsPerSecond));
 
+        //float stepDuration = 1.0f / stepsPerSecond;
+        float stepFloat = preciseTimer*stepsPerSecond;
+        //print(stepFloat);
+
         //call onStepUpdate if we have just moved to a new step
-        if ((int)(preciseTimer * stepsPerSecond) != stepCounter)
+        /* if (preciseTimer >= stepDuration * stepCounter)
+         {
+             stepCounter++;
+             Debug.Log(stepCounter);
+             onStepUpdate();
+         }*/
+        //print((int)Math.Floor(preciseTimer * stepsPerSecond));
+        ////print(Time.deltaTime);
+        //if((int)Math.Floor(preciseTimer*stepsPerSecond) >= stepCounter)
+        //{
+        //    stepCounter++;
+        //    Debug.Log(stepCounter);
+        //    onStepUpdate();
+        //}
+
+        if (preciseTimer >= nextStepTime)
         {
-            stepCounter = (int)(preciseTimer * stepsPerSecond);
+            nextStepTime = preciseTimer + stepDuration;
+            stepCounter++;
             Debug.Log(stepCounter);
             onStepUpdate();
         }
@@ -121,10 +146,10 @@ public class BossManagerScript : MonoBehaviour
         {
             //print("CONTAINS KEY");
             List<Attack> currentStepAttackList = attackList[stepCounter]; //a list of attacks happening on this step
-            print("current step attack list count: " + currentStepAttackList.Count);
+            //print("current step attack list count: " + currentStepAttackList.Count);
             for (int i = 0; i < currentStepAttackList.Count; i++)
             {
-                print("i: " + i);
+                //print("i: " + i);
                 currentStepAttackList[i].create();
             }
         }
