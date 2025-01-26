@@ -54,32 +54,43 @@ public class BossManagerScript : MonoBehaviour
         //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
         new Burst(-3.0f, 2.0f, 4, 57, 1, 0.8f, projectile, attackList,0);
 
-        //measure 7
+        //measure 8
         attackList[56] = new List<Attack>();
         //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
         new Burst(-1.7f, 2.0f, 4, 65, 1, 0.8f, projectile, attackList,1);
 
-        //measure 7
+        //measure 9
         attackList[64] = new List<Attack>();
         //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
         new BurstFromCenter(90.0f, 3.5f, 2, 64, 1, 180.0f, projectile, attackList);
 
-        //measure 8
+        //measure 10
         attackList[72] = new List<Attack> {
             new SingleShotFromTop(-1.25f, 2.0f, projectile),
             new SingleShotFromBottom(9.3f, 2.0f, projectile),
         };
 
-        //measure 9
+        //measure 11
         attackList[80] = new List<Attack> {
             new SingleShotFromRight(0.0f, 2.0f, projectile),
             new SingleShotFromRight(-10.0f, 2.0f, projectile),
         };
 
+        //measure 13
+        attackList[96] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(0.0f, 2.0f, 3, 96, 0, 45.0f, projectile, attackList);
+        new BurstFromCenter(180.0f, 2.0f, 3, 96, 0, 45.0f, projectile, attackList);
+
+        //PRECHORUS
+        //measure 15
+        attackList[3] = new List<Attack> { new SingleShotFromTop(1.5f, 2.0f, homingMissile) };
+
+
         //big horn hit at step 162
         attackList[162] = new List<Attack>();
         //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
-        new BurstFromCenter(0.0f, 2.0f, 8, 162, 0, 45.0f, projectile, attackList);
+        new BurstFromCenter(0.0f, 3.0f, 8, 162, 0, 45.0f, projectile, attackList);
 
     }
 
@@ -139,7 +150,7 @@ public class BossManagerScript : MonoBehaviour
         }
 
         public override void create() {
-            float yPos = 1.0f;
+            float yPos = 5.65f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 0));
             newProjectile.GetComponent<BossProjectileScript>().speed = speed;
@@ -214,7 +225,7 @@ public class BossManagerScript : MonoBehaviour
 
         public override void create()
         {
-            float xPos = -14.3f;
+            float xPos = 14.3f;
             Vector3 spawnPosition = new Vector3(xPos, yPos, 0);
             //GameObject newProjectile = Instantiate(projectile, spawnPosition, Quaternion.Euler(0, 0, 270));
             //newProjectile.GetComponent<TackProjectileScript>().speed = speed;
