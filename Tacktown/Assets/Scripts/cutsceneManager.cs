@@ -316,8 +316,8 @@ public class cutsceneManager : MonoBehaviour
                         break;
                     case 1: //I just...
                         switchFrame(8, 25);
-                        startFade(5.0f, true);
-                        autoTimeToNext(7.0f);
+                        startFade(4.0f, true);
+                        autoTimeToNext(6.0f);
                         break;
                     case 2: //Funny how
                         switchFrame(3, 7);
