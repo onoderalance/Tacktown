@@ -33,9 +33,7 @@ public class TackProjectileScript : MonoBehaviour
     //destroy itself when it hits a wall
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision!");
         if (collision.gameObject.CompareTag("wall")) {
-            Debug.Log("destroy");
             Destroy(gameObject);
         }
 
