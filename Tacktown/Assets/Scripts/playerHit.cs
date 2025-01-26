@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class playerHit : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private gameManager gm;
+    public Rigidbody2D rb;
+    public gameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
+        //gm = FindObjectOfType<gameManager>(); // Find the gameManager in the scene
     }
 
     // Update is called once per frame

@@ -492,6 +492,51 @@ MonoBehaviour:
   homingMissile: {fileID: 5853833625276393634, guid: c328ea279126a407abdbb7c3c6ace7d0, type: 3}
   rotatingSpike: {fileID: 4179432549407190459, guid: a86225212883b4f16b4f7def689af128, type: 3}
   stepsPerSecond: 2.933
+--- !u!1 &1387295334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387295336}
+  - component: {fileID: 1387295335}
+  m_Layer: 0
+  m_Name: gameManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1387295335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387295334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bdb924095ce542a4a647be58040f091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverScreen: {fileID: 0}
+--- !u!4 &1387295336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387295334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.721966, y: 3.4619622, z: -0.041044224}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1415408877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,6 +585,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 875033615173750370, guid: 79422cf1510794607a1aca7a77e26625, type: 3}
+      propertyPath: gm
+      value: 
+      objectReference: {fileID: 1387295335}
     - target: {fileID: 2705830584648145273, guid: 79422cf1510794607a1aca7a77e26625, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1074,3 +1123,4 @@ SceneRoots:
   - {fileID: 1962662839}
   - {fileID: 1254096944}
   - {fileID: 238914593}
+  - {fileID: 1387295336}
