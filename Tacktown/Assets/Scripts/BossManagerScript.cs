@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.SceneManagement;
 
 public class BossManagerScript : MonoBehaviour
 {
@@ -302,6 +303,11 @@ public class BossManagerScript : MonoBehaviour
                 //print("i: " + i);
                 currentStepAttackList[i].create();
             }
+        }
+
+        if (stepCounter >= 50)
+        {
+            SceneManager.LoadScene(sceneName: "CutsceneEnd");
         }
 
     }
