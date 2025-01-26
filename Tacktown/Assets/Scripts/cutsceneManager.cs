@@ -128,13 +128,13 @@ public class cutsceneManager : MonoBehaviour
             case 1: //intro scene
                 switch (cutsceneIndex)
                 {
-                    case 0: //title
+                    case 0: //blalck 1
                         switchFrame(2, -1);
-                        autoTimeToNext(6.0f);
+                        autoTimeToNext(6.04f);
                         break;
                     case 1: //title
                         switchFrame(0, -1);
-                        autoTimeToNext(3.0f);
+                        autoTimeToNext(3.12f);
                         break;
                     case 2: //black 1
                         switchFrame(2, -1);
@@ -142,11 +142,11 @@ public class cutsceneManager : MonoBehaviour
                         break;
                     case 3: //subtitle
                         switchFrame(1, -1);
-                        autoTimeToNext(4.0f);
+                        autoTimeToNext(4.5f);
                         break;
                     case 4: //black 2
                         switchFrame(2, -1);
-                        autoTimeToNext(3.0f);
+                        autoTimeToNext(3.5f);
                         break;
                     case 5: //it always starts...
                         switchFrame(3, 0);
@@ -162,10 +162,104 @@ public class cutsceneManager : MonoBehaviour
                         autoTimeToNext(2.0f);
                         startFade(1.5f, true);
                         break;
-                    case 8: //It's not going to be pretty...
+                    case 8: //Soft eyes...
                         switchFrame(5, 2);
-                        autoTimeToNext(3.0f);
+                        autoTimeToNext(4.0f);
                         startFade(1.0f, true);
+                        break;
+                    case 9: //She carried
+                        switchFrame(4, 3);
+                        autoTimeToNext(2.6f);
+                        startFade(1.5f, false);
+                        break;
+                    case 10: //Gorg
+                        switchFrame(4, 4);
+                        autoTimeToNext(1.0f);
+                        break;
+                    case 11: //Gase
+                        switchFrame(4, 5);
+                        autoTimeToNext(1.0f);
+                        break;
+                    case 12: //Bod
+                        switchFrame(4, 6);
+                        autoTimeToNext(1.0f);
+                        break;
+                    case 13: //No matter....
+                        switchFrame(5, 7);
+                        autoTimeToNext(4.0f);
+                        startFade(2.4f, true);
+                        break;
+                    case 14: //When the surface...
+                        setFadeAlpha(1.0f);
+                        switchFrame(4, 8);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 15: //When the air runs
+                        switchFrame(4, 9);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 16: //And I messed up
+                        switchFrame(3, 1);
+                        autoTimeToNext(3.5f);
+                        break;
+                    case 17: //I thought I was protecting her
+                        switchFrame(3, 2);
+                        autoTimeToNext(4.0f);
+                        break;
+                    case 18: //but i hurt....
+                        switchFrame(3, 3);
+                        autoTimeToNext(4.0f);
+                        break;
+                    case 19: //And just like that...
+                        switchFrame(5, 10);
+                        autoTimeToNext(4.0f);
+                        startFade(2.4f, true);
+                        break;
+                    case 20: //But now....
+                        switchFrame(4, 11);
+                        autoTimeToNext(3.0f);
+                        startFade(1.5f, false);
+                        break;
+                    case 21: //Snatched..
+                        switchFrame(4, 12);
+                        autoTimeToNext(3.0f);
+                        break;
+                    case 22: //Word is...
+                        switchFrame(4, 13);
+                        autoTimeToNext(4.0f);
+                        break;
+                    case 23: //...the sketchiest
+                        switchFrame(4, 14);
+                        autoTimeToNext(3.0f);
+                        break;
+                    case 24: //This town has
+                        switchFrame(4, 15);
+                        autoTimeToNext(3.0f);
+                        break;
+                    case 25: //The air isi sharp
+                        switchFrame(4, 16);
+                        autoTimeToNext(3.0f);
+                        break;
+                    case 26: //Its not pretty
+                        switchFrame(4, 17);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 27: //Its not clean
+                        switchFrame(4, 18);
+                        autoTimeToNext(2.5f);
+                        break;
+                    case 28: //But I at least
+                        switchFrame(4, 19);
+                        autoTimeToNext(3.0f);
+                        startFade(2.0f, true);
+                        break;
+                    case 29: //they say
+                        switchFrame(3, 4);
+                        autoTimeToNext(4f);
+                        break;
+                    case 30: //but i sure as hell
+                        switchFrame(3, 5);
+                        autoTimeToNext(3.5f);
                         break;
 
                 }
