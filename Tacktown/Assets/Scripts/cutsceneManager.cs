@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using UnityEngine.SceneManagement;
+
 public class cutsceneManager : MonoBehaviour
 {
     public GameObject hudObject;
@@ -266,6 +268,9 @@ public class cutsceneManager : MonoBehaviour
                         switchFrame(3, 5);
                         autoTimeToNext(3.5f);
                         break;
+                    case 31: //GOTO LEVEL
+                        SceneManager.LoadScene("Level");
+                        break;
 
                 }
                 break;
@@ -302,6 +307,9 @@ public class cutsceneManager : MonoBehaviour
                     case 6: //pop him
                         switchFrame(6, 24);
                         autoTimeToNext(4.0f);
+                        break;
+                    case 7: //go to boss
+                        SceneManager.LoadScene("BossScene");
                         break;
 
                 }

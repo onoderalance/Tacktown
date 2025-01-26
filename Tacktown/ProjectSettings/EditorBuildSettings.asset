@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutsceneIntro.unity
     guid: 3ce67ae06d8a78c4cab6e112b0a3b6c9
+  - enabled: 1
+    path: Assets/Scenes/Level.unity
+    guid: 54a55a2d7da424fa19916cd7117a00f3
+  - enabled: 1
+    path: Assets/Scenes/CutsceneBetray.unity
+    guid: 270b76c5634eae74fb7b90b00ef7fa4c
+  - enabled: 1
+    path: Assets/Scenes/BossScene.unity
+    guid: 2d5d30aac525b4ccfa3d8720712ceb9f
+  - enabled: 1
+    path: Assets/Scenes/CutsceneEnd.unity
+    guid: 578f2387b708d4948b71ffc14589643b
   m_configObjects: {}
