@@ -16,29 +16,37 @@ public class dialogue : MonoBehaviour
     public AudioSource audioSource;
     public bool useBubbleAudio = true; // choose which audio to use
 
+    public bool isActive = false; //determines if the given text box is active
+    public bool canSkip = true; //determiens if the player is able to skip the current text
+
     private Coroutine typingCoroutine; // Store the current typing coroutine for control
 
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialogue();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
+        if (isActive)
         {
-            if (textComponent.text == lines[index])
+            if(canSkip)
             {
-                NextLine();
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) // skip to end with click or space
+                {
+                    if (textComponent.text == lines[index])
+                    {
+                        NextLine();
+                    }
+                    else
+                    {
+                        StopTyping();
+                        textComponent.text = lines[index];
+                        StopAudio();
+                    }
+                }
             }
-            else
-            {
-                StopTyping();
-                textComponent.text = lines[index];
-                StopAudio();
-            }
-        }
+        } 
     }
 
     public int getCurrentIndex()
@@ -52,7 +60,7 @@ public class dialogue : MonoBehaviour
         ContinueDialogue();
     }
 
-    public void ContinueDialogue()
+    public void ContinueDialogue() // dont really need to call
     {
         if (index < lines.Length)
         {
@@ -61,6 +69,7 @@ public class dialogue : MonoBehaviour
 
             typingCoroutine = StartCoroutine(TypeLine());
         }
+        isActive = true;
     }
 
     public void PauseDialogue()
@@ -71,9 +80,13 @@ public class dialogue : MonoBehaviour
             typingCoroutine = null;
             StopAudio();
         }
+        //clear text
+        textComponent.text = string.Empty;
+        isActive = false;
     }
 
-    public void SkipToLine(int lineIndex)
+    // USE THIS MOSTLY
+    public void SkipToLine(int lineIndex) // calls continuedialogue
     {
         if (lineIndex >= 0 && lineIndex < lines.Length)
         {
@@ -82,6 +95,12 @@ public class dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             ContinueDialogue();
         }
+    }
+
+    public bool toggleSkip() // allows you to disable/able ffwrd / skip, returns whether active or not
+    {
+        canSkip = !canSkip;
+        return canSkip;
     }
 
     private void StopTyping()
