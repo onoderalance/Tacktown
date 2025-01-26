@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     public GameObject gameOverScreen;
+    public movement m;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class gameManager : MonoBehaviour
         print("RESTART CLICKED");
         SceneManager.LoadScene("Level");
         gameOverScreen.SetActive(false);
+        m.bubleIsAlive = true;
     }
 
     public void gameOver()
