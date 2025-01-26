@@ -468,16 +468,32 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
       value: It always starts with a woman...
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[1]
-      value: 
+      value: And I messed up.
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[2]
-      value: 
+      value: I thought I was protecting her.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[3]
+      value: ...but I hurt my Michelle.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[4]
+      value: "They say you can\u2019t fix the past..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[5]
+      value: ...but I can sure as hell try.
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_SizeDelta.y
@@ -748,7 +764,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 79537d6a773e6ce4ab3003a22f166ca2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 351133af6af0e7a4b90d0a82d7be0ed7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -961,12 +977,88 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
       value: "My woman\u2019s name was Michelle."
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[1]
       value: She was my belle.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[2]
+      value: 'Soft eyes, sharp tongue, and radiant. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[3]
+      value: 'She carried all the world''s colors inside that '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[4]
+      value: Gorgeous
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[5]
+      value: Gaseous
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[6]
+      value: Body.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[7]
+      value: "No matter how much I loved her, what matters is how you act \u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[8]
+      value: "\u2026 when the surface tension breaks."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[9]
+      value: 'When the air runs out. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[10]
+      value: And just like that, she floated out of my life.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[11]
+      value: "But now, she\u2019s in trouble."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[12]
+      value: Snatched up by some lowlife tackheads.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[13]
+      value: "Word on the street is they\u2019re keeping her in the Prickly Pighouse\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[14]
+      value: "\u2026the sketchiest club in Tack City."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[15]
+      value: 'This town has never been good to my kind. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[16]
+      value: The air is sharp and the streets are sharper.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[17]
+      value: "It\u2019s not gonna be pretty."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[18]
+      value: "It\u2019s not gonna be clean."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[19]
+      value: But I at least owe her this much.
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Pivot.x
