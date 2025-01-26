@@ -18,13 +18,11 @@ public class PanicButton : MonoBehaviour
         {
             SceneManager.LoadScene("CutsceneIntro");
         }
-
         // Check if F2 is pressed
         if (Input.GetKeyDown(KeyCode.F2))
         {
             SceneManager.LoadScene("Level");
         }
-
         if (Input.GetKeyDown(KeyCode.F3))
         {
             SceneManager.LoadScene("CutsceneBetray");
