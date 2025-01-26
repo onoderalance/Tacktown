@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  playerPosition: {fileID: 0}
 --- !u!61 &5000657434107431444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133,9 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b981f370c37da4b2cad92935609fd4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 3
   playerPosition: {fileID: 0}
   timeAlive: 5
+  hits: 1
 --- !u!212 &4508398347635969883
 SpriteRenderer:
   m_ObjectHideFlags: 0

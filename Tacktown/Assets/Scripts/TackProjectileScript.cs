@@ -7,6 +7,7 @@ public class TackProjectileScript : MonoBehaviour
 
     public float speed = 1.0f;
     float rangeFromPlayer = 30.0f;
+    public Transform playerPosition;
     private Rigidbody2D rb;
     //public GameObject player;
 
