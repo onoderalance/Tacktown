@@ -126,35 +126,40 @@ public class cutsceneManager : MonoBehaviour
                 switch (cutsceneIndex)
                 {
                     case 0: //title
+                        switchFrame(2, -1);
+                        autoTimeToNext(6.0f);
+                        break;
+                    case 1: //title
                         switchFrame(0, -1);
-                        autoTimeToNext(2.5f);
+                        autoTimeToNext(3.0f);
                         break;
-                    case 1: //black 1
+                    case 2: //black 1
                         switchFrame(2, -1);
-                        autoTimeToNext(1.0f);
+                        autoTimeToNext(2.0f);
                         break;
-                    case 2: //subtitle
+                    case 3: //subtitle
                         switchFrame(1, -1);
-                        autoTimeToNext(2.5f);
+                        autoTimeToNext(4.0f);
                         break;
-                    case 3: //black 2
+                    case 4: //black 2
                         switchFrame(2, -1);
-                        autoTimeToNext(1.0f);
+                        autoTimeToNext(3.0f);
                         break;
-                    case 4: //it always starts...
+                    case 5: //it always starts...
                         switchFrame(3, 0);
                         autoTimeToNext(5.0f);
                         break;
-                    case 5: //My woman...
+                    case 6: //My woman...
                         switchFrame(4, 0);
                         autoTimeToNext(3.0f);
+                        startFade(1.5f, false);
                         break;
-                    case 6: //She was my belle.
+                    case 7: //She was my belle.
                         switchFrame(4, 1);
                         autoTimeToNext(2.0f);
                         startFade(1.5f, true);
                         break;
-                    case 7: //It's not going to be pretty...
+                    case 8: //It's not going to be pretty...
                         switchFrame(5, 2);
                         autoTimeToNext(3.0f);
                         startFade(1.0f, true);
