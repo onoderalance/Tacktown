@@ -12,9 +12,9 @@ public class BossManagerScript : MonoBehaviour
 
     float preciseTimer = 0.0f; //delta time
     int stepCounter = 0; //increases every (stepTime) second
-    float stepsPerSecond = (88.0f/60.0f)*2.0f; //8th notes at 88bpm
-    float stepDuration;
-    float nextStepTime;
+    float stepsPerSecond = (60.0f/88.0f)*2.0f; //8th notes at 88bpm
+    float stepDuration = (60.0f/88.0f)/2.0f;
+    float timeLeftInStep;
     
 
     enum AttackType    {SHOT_FROM_TOP, SHOT_FROM_BOTTOM, SHOT_FROM_LEFT, SHOT_FROM_RIGHT,
@@ -27,8 +27,7 @@ public class BossManagerScript : MonoBehaviour
     void Start()
     {
 
-        stepDuration = 1f / stepsPerSecond;
-        nextStepTime = preciseTimer + stepDuration;
+        timeLeftInStep = stepDuration;
 
         //projectile = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/BossFightEnemies/BossProjecile.prefab", typeof(GameObject));
         //GameObject newProjectile = Instantiate(projectile, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0));
@@ -43,7 +42,7 @@ public class BossManagerScript : MonoBehaviour
 
         attackList = new Dictionary<int, List<Attack>>();
 
-        attackList[9] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
+        attackList[9] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, projectile) };
 
         //downbeat of first chorus (measure 5)
         attackList[33] = new List<Attack> {
@@ -91,12 +90,66 @@ public class BossManagerScript : MonoBehaviour
         attackList[112] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
         //measure 17
-        attackList[112] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
+        attackList[128] = new List<Attack> { new SingleShotFromCenter(1.5f, 2.0f, homingMissile) };
 
         //big horn hit at step 152
         attackList[152] = new List<Attack>();
         //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
-        new BurstFromCenter(0.0f, 3.0f, 8, 162, 0, 45.0f, projectile, attackList);
+        new BurstFromCenter(0.0f, 3.0f, 8, 152, 0, 45.0f, projectile, attackList);
+
+        //measure 20 horn hits
+        attackList[170] = new List<Attack>();
+        new Burst(-3.6f, 2.0f, 3, 170, 2, 6.0f, projectile, attackList, 0);
+
+        //measure 21 horn hits
+        attackList[178] = new List<Attack>();
+        new Burst(-12.0f, 2.0f, 3, 178, 2, 6.0f, projectile, attackList, 3);
+
+        //measure 22
+        attackList[184] = new List<Attack>();
+        new BurstFromCenter(0.0f, 2.0f, 3, 184, 1, 45.0f, homingMissile, attackList);
+
+        //measure 23
+        attackList[192] = new List<Attack>();
+        new BurstFromCenter(45.0f, 2.0f, 4, 192, 1, 90.0f, projectile, attackList);
+
+        //measure 24
+        attackList[200] = new List<Attack>();
+        new Burst(9.0f, 2.0f, 3, 178, 2, -6.0f, projectile, attackList, 2);
+
+        //VERSE
+        //measure 36
+        attackList[280] = new List<Attack>();
+        //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
+        new Burst(-3.0f, 3.0f, 4, 280, 1, 0.8f, projectile, attackList, 0);
+
+        //measure 37
+        attackList[288] = new List<Attack>();
+        //start xPos, speed, numShots, step start, time offset, xPos offset, projectile object, attack list
+        new Burst(-1.7f, 2.0f, 4, 288, 1, 0.8f, projectile, attackList, 1);
+
+        //measure 38
+        attackList[296] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(90.0f, 3.5f, 2, 296, 1, 180.0f, projectile, attackList);
+
+        //measure 39
+        attackList[304] = new List<Attack> {
+            new SingleShotFromTop(-1.25f, 3.0f, homingMissile),
+            new SingleShotFromBottom(9.3f, 3.0f, projectile),
+        };
+
+        //measure 40
+        attackList[312] = new List<Attack> {
+            new SingleShotFromRight(0.0f, 3.0f, projectile),
+            new SingleShotFromRight(-10.0f, 3.0f, homingMissile),
+        };
+
+        //measure 13
+        attackList[320] = new List<Attack>();
+        //start angle, speed, numShots, step start, time offset, angle offset, projectile object, attack list
+        new BurstFromCenter(0.0f, 2.0f, 3, 320, 0, 45.0f, projectile, attackList);
+        new BurstFromCenter(180.0f, 2.0f, 3, 320, 0, 45.0f, projectile, attackList);
 
     }
 
@@ -104,6 +157,7 @@ public class BossManagerScript : MonoBehaviour
     void Update()
     {
         preciseTimer += Time.deltaTime;
+        timeLeftInStep -= Time.deltaTime;
 
         //Debug.Log((int)(preciseTimer/stepsPerSecond));
 
@@ -127,9 +181,9 @@ public class BossManagerScript : MonoBehaviour
         //    onStepUpdate();
         //}
 
-        if (preciseTimer >= nextStepTime)
+        if (timeLeftInStep <= 0)
         {
-            nextStepTime = preciseTimer + stepDuration;
+            timeLeftInStep = stepDuration;
             stepCounter++;
             Debug.Log(stepCounter);
             onStepUpdate();
