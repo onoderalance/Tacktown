@@ -280,12 +280,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 824114734}
   background: {fileID: 21300000, guid: de8e73b44c024c043a067374ed92717f, type: 3}
   title: {fileID: 21300000, guid: c89d906bfe018ec4eba1e11b3be6f805, type: 3}
-  subtitle: {fileID: 21300000, guid: b35cee152d68020408ba8c62dce04030, type: 3}
+  subtitle: {fileID: 21300000, guid: 70d156a2f55a67a4da30b8f2838b6b02, type: 3}
   sprite1: {fileID: 21300000, guid: 8a9254bf394c4cb459a2157f57d71d4a, type: 3}
   sprite2: {fileID: 21300000, guid: 91f17cfaba2dcc4459853ee0ba44de17, type: 3}
-  sprite3: {fileID: 0}
-  sprite3a: {fileID: 0}
-  sprite4: {fileID: 0}
+  sprite3: {fileID: 21300000, guid: be3f98594915fc140bc200df5ff5f231, type: 3}
+  sprite3a: {fileID: 21300000, guid: f53ed636e67735647bc9dd531c50623e, type: 3}
+  sprite4: {fileID: 21300000, guid: 573a5dc774b09f34f810bc1a80a60260, type: 3}
   SceneID: 1
   currDialogue: {fileID: 0}
   timeElapsed: 0
