@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     //public GameObject gameOverScreen;
-    public GameOverScreen gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -21,16 +20,15 @@ public class gameManager : MonoBehaviour
         
     }
 
-    public void restartGame()
-    {
-        print("RESTART CLICKED");
-        SceneManager.LoadScene("Level");
-        //gameOverScreen.SetActive(false);
-    }
+    //public void restartGame()
+    //{
+    //    print("RESTART CLICKED");
+    //    SceneManager.LoadScene("Level");
+    //    gameOverScreen.SetActive(false);
+    //}
 
     public void gameOver()
     {
         //gameOverScreen.SetActive(true);
-        gameOverScreen.Setup();
     }
 }
