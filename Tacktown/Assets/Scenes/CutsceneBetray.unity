@@ -283,7 +283,10 @@ MonoBehaviour:
   subtitle: {fileID: 21300000, guid: b35cee152d68020408ba8c62dce04030, type: 3}
   sprite1: {fileID: 21300000, guid: 8a9254bf394c4cb459a2157f57d71d4a, type: 3}
   sprite2: {fileID: 21300000, guid: 91f17cfaba2dcc4459853ee0ba44de17, type: 3}
-  SceneID: 1
+  sprite3: {fileID: 21300000, guid: be3f98594915fc140bc200df5ff5f231, type: 3}
+  sprite3a: {fileID: 21300000, guid: f53ed636e67735647bc9dd531c50623e, type: 3}
+  sprite4: {fileID: 21300000, guid: 573a5dc774b09f34f810bc1a80a60260, type: 3}
+  SceneID: 2
   currDialogue: {fileID: 0}
   timeElapsed: 0
   timerActive: 0
@@ -470,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
@@ -495,6 +498,14 @@ PrefabInstance:
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[5]
       value: ...but I can sure as hell try.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[6]
+      value: You always did like playing the hero.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[7]
+      value: 'Funny how life works. '
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_SizeDelta.y
@@ -766,7 +777,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4d09fb402e76e4a4baaad410e96605e0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -979,7 +990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.size
-      value: 20
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[0]
@@ -1060,6 +1071,30 @@ PrefabInstance:
     - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: lines.Array.data[19]
       value: But I at least owe her this much.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[20]
+      value: "Michelle! Thank God you\u2019re safe, I thought I lost you!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[21]
+      value: 'Lost me? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[22]
+      value: "Aww honey, you can\u2019t lose what you never had."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[23]
+      value: "I\u2019m done wasting my air."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[24]
+      value: Pop him, boys!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492400658697041713, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
+      propertyPath: lines.Array.data[25]
+      value: 'I just wanted to make things right. '
       objectReference: {fileID: 0}
     - target: {fileID: 2266154811921320107, guid: 52ae7326b12ed48d394857b1ad6a3299, type: 3}
       propertyPath: m_Pivot.x
