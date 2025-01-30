@@ -176,7 +176,7 @@ public class cutsceneManager : MonoBehaviour
                         break;
                     case 9: //She carried
                         switchFrame(4, 3);
-                        autoTimeToNext(2.6f);
+                        autoTimeToNext(2.8f);
                         startFade(1.5f, false);
                         break;
                     case 10: //Gorg
@@ -233,7 +233,7 @@ public class cutsceneManager : MonoBehaviour
                         break;
                     case 22: //Word is...
                         switchFrame(4, 13);
-                        autoTimeToNext(4.0f);
+                        autoTimeToNext(4.6f);
                         break;
                     case 23: //...the sketchiest
                         switchFrame(4, 14);
